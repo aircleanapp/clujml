@@ -117,7 +117,7 @@ function weather() {
         $("#day7icon").attr('src','images/icons/' + data.daily.data[7].icon + '.svg');
         $("#temp").html( toC(data.currently.temperature) + "°");
 		$("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°");
-		$("#ozone").html(data.currently.ozone+" DU");
+		$("#ozone").html(Math.round(data.currently.ozone)+" DU");
 		$("#uvIndex").html(data.currently.uvIndex);
         $("#precipProbability").html( Math.round(data.currently.precipProbability*100) + " % ");  
 		$("#humidity").html( Math.round(data.currently.humidity*100) + " % ");
@@ -125,7 +125,7 @@ function weather() {
 		$("#windGust").html( Math.round (data.currently.windGust*1.609) + " ㎞h");
 		$("#windBearing").html(data.currently.windBearing + "° ");		  
 		$("#dewPoint").html( toC(data.currently.dewPoint) + "°");
-		$("#pressure").html( data.currently.pressure);
+		$("#pressure").html( Math.round(data.currently.pressure));
 		$("#cloudCover").html( Math.round(data.currently.cloudCover*100) + "%");
 		$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
 		$("#icon").attr('src','images/icons/' + data.currently.icon + '.svg');
