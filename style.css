@@ -974,9 +974,7 @@ form textarea {
 
 @media (max-width: 767px) {
     
-    .weatherIcons img {
-        width: 7px!important;
-    }
+    /*.weatherIcons img {width: 7px!important;}*/
     
     .forecast-container .forecast .forecast-header {
         font-size: 10px;
@@ -1257,7 +1255,7 @@ form textarea {
   width: 100%;
   overflow: hidden;
   border-radius: 10px;
-  margin-top: -150px;
+  /*margin-top: -150px;*/
   margin-bottom: 50px; }
   .forecast-container .forecast {
     display: table-cell;
