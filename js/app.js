@@ -95,28 +95,28 @@ function weather() {
     $.getJSON(
       url + apiKey + "/" + latitude + "," + longitude + "?callback=?",
       function(data) { console.log(data);
-        $("#summaryh").html(data.hourly.summary);  
-        $("#summaryd").html(data.daily.summary);                
-        $("#day2tempHigh").html(toC(data.daily.data[2].temperatureHigh)+"°C");
-        $("#day2tempLow").html(toC(data.daily.data[2].temperatureLow)+"°C");
-        $("#day3tempHigh").html(toC(data.daily.data[3].temperatureHigh)+"°C");
-        $("#day3tempLow").html(toC(data.daily.data[3].temperatureLow)+"°C");
-        $("#day4tempHigh").html(toC(data.daily.data[4].temperatureHigh)+"°C");
-        $("#day4tempLow").html(toC(data.daily.data[4].temperatureLow)+"°C");
-        $("#day5tempHigh").html(toC(data.daily.data[5].temperatureHigh)+"°C");
-        $("#day5tempLow").html(toC(data.daily.data[5].temperatureLow)+"°C");
-        $("#day6tempHigh").html(toC(data.daily.data[6].temperatureHigh)+"°C");
-        $("#day6tempLow").html(toC(data.daily.data[6].temperatureLow)+"°C");
-        $("#day7tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°C");
-        $("#day7tempLow").html(toC(data.daily.data[7].temperatureLow)+"°C");
+        $("#summaryh").html(replaceF(data.hourly.summary));  
+        $("#summaryd").html(replaceF(data.daily.summary));                
+        $("#day2tempHigh").html(toC(data.daily.data[2].temperatureHigh)+"°");
+        $("#day2tempLow").html(toC(data.daily.data[2].temperatureLow)+"°");
+        $("#day3tempHigh").html(toC(data.daily.data[3].temperatureHigh)+"°");
+        $("#day3tempLow").html(toC(data.daily.data[3].temperatureLow)+"°");
+        $("#day4tempHigh").html(toC(data.daily.data[4].temperatureHigh)+"°");
+        $("#day4tempLow").html(toC(data.daily.data[4].temperatureLow)+"°");
+        $("#day5tempHigh").html(toC(data.daily.data[5].temperatureHigh)+"°");
+        $("#day5tempLow").html(toC(data.daily.data[5].temperatureLow)+"°");
+        $("#day6tempHigh").html(toC(data.daily.data[6].temperatureHigh)+"°");
+        $("#day6tempLow").html(toC(data.daily.data[6].temperatureLow)+"°");
+        $("#day7tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°");
+        $("#day7tempLow").html(toC(data.daily.data[7].temperatureLow)+"°");
         $("#day2icon").attr('src','images/icons/' + data.daily.data[2].icon + '.svg');
         $("#day3icon").attr('src','images/icons/' + data.daily.data[3].icon + '.svg');
         $("#day4icon").attr('src','images/icons/' + data.daily.data[4].icon + '.svg');
         $("#day5icon").attr('src','images/icons/' + data.daily.data[5].icon + '.svg');
         $("#day6icon").attr('src','images/icons/' + data.daily.data[6].icon + '.svg');
         $("#day7icon").attr('src','images/icons/' + data.daily.data[7].icon + '.svg');
-        $("#temp").html( toC(data.currently.temperature) + "°C");
-		$("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°C");
+        $("#temp").html( toC(data.currently.temperature) + "°");
+		$("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°");
 		$("#ozone").html(data.currently.ozone+" DU");
 		$("#uvIndex").html(data.currently.uvIndex);
         $("#precipProbability").html( Math.round(data.currently.precipProbability*100) + " % ");  
@@ -124,7 +124,7 @@ function weather() {
 		$("#windSpeed").html( Math.round (data.currently.windSpeed*1.609) + " ㎞h");
 		$("#windGust").html( Math.round (data.currently.windGust*1.609) + " ㎞h");
 		$("#windBearing").html(data.currently.windBearing + "° ");		  
-		$("#dewPoint").html( toC(data.currently.dewPoint) + "°C");
+		$("#dewPoint").html( toC(data.currently.dewPoint) + "°");
 		$("#pressure").html( data.currently.pressure);
 		$("#cloudCover").html( Math.round(data.currently.cloudCover*100) + "%");
 		$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
@@ -304,6 +304,19 @@ function today() {
   $("#day5").html(days[ daynum+4 ]);
   $("#day6").html(days[ daynum+5 ]);
   $("#day7").html(days[ daynum+6 ]);
+}
+
+function replaceF(str) {
+  var regex = /\d{1,3}/; 
+  var fahr = parseInt(str.match(regex));
+  if (fahr) {
+    return str.replace(regex, (toC (fahr))) .replace("°F", "°C");     
+  } else {
+    return str;
+  }
+  
+  //var regex = /\d{1,3}/;
+  //return str.replace(regex, (parseInt(str.search(regex))-32)/1.8).replace("°F", "°C");
 }
 
 (function($, document, window){
