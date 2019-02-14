@@ -975,11 +975,9 @@ form textarea {
 @media (max-width: 767px) {
     
     /*.weatherIcons img {width: 7px!important;}*/
-    
     .forecast-container .forecast .forecast-header {
         font-size: 10px;
     }
-    
     .forecast-icon img {
         width: 36px;
     }
@@ -1751,3 +1749,7 @@ form textarea {
 #apparentTemperature {color:#F7B563; font-size:1em;}
 
 .hid {display:none;}
+@media (max-width: 767px) {
+    .mobileHid {display: none;}
+    .mobileSee {display: inline;}
+}
