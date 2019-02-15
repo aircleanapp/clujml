@@ -62,7 +62,7 @@
 							<!--<li class="menu-item"><a href="news.html">Good2Know</a></li>-->
 							<li class="menu-item"><a href="dashboard.html">1st Sensor</a></li>
 							<li class="menu-item"><a href="imp/index.html">Presentation</a></li>
-							<!--<li class="menu-item"><a href="contact.html">Contact</a></li>-->
+							<li class="menu-item"><a href="#contact">Contact</a></li>
 						</ul> <!-- .menu -->
 					</div> <!-- .main-navigation -->
 
@@ -316,8 +316,18 @@
 				</div>
 			</main> <!-- .main-content -->
 
-			<footer class="site-footer">
+			<footer class="site-footer" id="contact">
 				<div class="container">
+                    <script type="text/javascript">var submitted=false;</script>
+		            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none" onload="if(submitted){$('#fname').val( 'Thank you, '+$('#fname').val()+' !' );$('#ftel').val('');$('#ftext').val('');$('#femail').val('');}"></iframe>
+		            <form action="https://docs.google.com/forms/d/e/1FAIpQLScTGwUFFJ1QeljzWRIytdHF_SxFdpcYJrQ0HvlcxUYOGsqi1w/formResponse" method="POST" id="mG61Hd" target="hidden_iframe" onsubmit="submitted=true;">
+                        <input id="fname" required type="text" placeholder="full name" name="entry.2005620554">
+                        <input id="femail" required type="email" placeholder="email" name="entry.1045781291">
+                        <input id="ftel" type="text" placeholder="tel" name="entry.1166974658">
+                        <input id="ftext" type="text" placeholder="your question/feedback/suggestion" width="30" name="entry.839337160">
+                        <button type="submit" onclick="submitted=true"><i class="fa fa-play"></i></button>
+                    </form>
+                    
 					<!-- <div class="row">
 						<div class="col-md-8">
 							<form action="#" class="subscribe-form">
@@ -334,7 +344,7 @@
 							</div>
 						</div>
 					</div> -->
-
+                    <br><br><br><br>
 					<p class="colophon">Copyright 2019 Clean Air Cluj</p>
 				</div>
 			</footer> <!-- .site-footer -->
