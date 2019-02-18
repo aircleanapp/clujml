@@ -92,7 +92,7 @@
 							<div class="forecast-content">
 								<div class="location"><span id="city"></span></div>
                                 <span id="summary"></span>
-						<span class="hid mobileSee"><br></span>
+						        <span class="hid mobileSee"><br></span>
                                 <img src="images/exhaust.svg" width=30><span id="pollutant"></span>
                                 <img src="images/molecule.svg" width=30><span id="vocaqi"></span>
 								<div class="degree">
@@ -108,11 +108,11 @@
                                 <div class="weatherIcons">
                                     <img src="images/feelslike.svg" width=15><span id="apparentTemperature"></span>
                                     <img src="images/icon-umberella.png" width=15 alt="" style="margin-right: 2px"><span id="precipProbability"></span>
-                                    <img src="images/dewpoint.svg" width=15 alt="" style="margin-right: 1px"><span id="dewPoint"></span>
-                                    <img src="images/waterdrop.svg" width=15 alt="" style="margin-right: 1px"><span id="humidity"></span>
+                                    <img src="images/dewpoint.svg" width=15 alt="" style="margin-right: 1px"><span style="margin-right: 1px" id="dewPoint"></span>
+                                    <img src="images/waterdrop.svg" width=15 alt="" style="margin-right: 0px"><span id="humidity"></span>
 			                        <span class="hid mobileSee"><br></span>
-                                    <img src="images/cloudcover.svg" width=23 alt="" style="margin-right: 1px"><span id="cloudCover"></span>
-                                    <img src="images/visibility.svg" width=18 alt="" style="margin-right: 1px"><span id="visibility"></span>
+                                    <img src="images/cloudcover.svg" width=25 alt="" style="margin-right: 1px"><span id="cloudCover"></span>
+                                    <img src="images/visibility.svg" width=20 alt="" style="margin-right: 1px"><span id="visibility"></span>
                                     <img src="images/sunblock.svg" width=15 alt="" style="margin-right: 1px"><span id="uvIndex"></span>
                                     <br>
                                     <img src="images/windy.svg" width=15 alt="" style="margin-right: 1px"><span id="windSpeed"></span>
@@ -284,6 +284,7 @@
                                     <li><a href="https://www.instructables.com/id/Air-Pollution-Detector/" target="_blank">DIY Sensor Box</a></li>
 								</ul>
 							</div>
+                            <span class="hid mobileSee"><br><br></span>
 							<div class="col-md-4">
 								<h2 class="section-title">Weather Conditions</h2>
 								<ul class="arrow-list">
@@ -297,6 +298,7 @@
 									<li><a href="#"></a></li> -->
 								</ul>
 							</div>
+                            <span class="hid mobileSee"><br><br></span>
 							<div class="col-md-4">
 								<h2 class="section-title">Photos</h2>
 								<div class="photo-grid">
@@ -319,13 +321,18 @@
 			<footer class="site-footer" id="contact">
 				<div class="container">
                     <script type="text/javascript">var submitted=false;</script>
-		            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none" onload="if(submitted){$('#fname').val( 'Thank you, '+$('#fname').val()+' !' );$('#ftel').val('');$('#ftext').val('');$('#femail').val('');}"></iframe>
+		            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none" onload="if(submitted){$('#fthx').html('<b><i>   Thank you, '+$('#fname').val()+' !</i></b>' ).removeClass('hid');$('#ftel').val('');$('#ftext').val('');$('#femail').val('');$('#fname').val('');}"></iframe>
 		            <form action="https://docs.google.com/forms/d/e/1FAIpQLScTGwUFFJ1QeljzWRIytdHF_SxFdpcYJrQ0HvlcxUYOGsqi1w/formResponse" method="POST" id="mG61Hd" target="hidden_iframe" onsubmit="submitted=true;">
                         <input id="fname" required type="text" placeholder="full name" name="entry.2005620554">
+                        <span class="hid mobileSee"><br><br></span>
                         <input id="femail" required type="email" placeholder="email" name="entry.1045781291">
+                        <span class="hid mobileSee"><br><br></span>
                         <input id="ftel" type="text" placeholder="tel" name="entry.1166974658">
+                        <span class="hid mobileSee"><br><br></span>
                         <input id="ftext" type="text" placeholder="your question/feedback/suggestion" width="30" name="entry.839337160">
+                        <span class="hid mobileSee"><br><br></span>
                         <button type="submit" onclick="submitted=true"><i class="fa fa-play"></i></button>
+                        <span id="fthx" class="hid"></span>
                     </form>
                     
 					<!-- <div class="row">
