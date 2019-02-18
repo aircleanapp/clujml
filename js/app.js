@@ -15,20 +15,23 @@ function showCountryMap () {
 function weather() {
     'use strict';
     
-    var location = document.getElementById("location"), apiKey = "7e069e35c71343b473906398a88ddd5e", url = "https://api.darksky.net/forecast/", aqiKey = "MZecdAz2qjDc9KGn5";
+    var location = document.getElementById("location"), apio = "7e069e35c71343b473906398a88ddd5", url = "https://api.darksky.net/forecast/", aqio = "MZecdAz2qjDc9KGn";
   
     //navigator.geolocation.getCurrentPosition(success, error );
-    success(null, 46.77, 23.55);
+    //success(null, 46.77, 23.55);
+    success(null,46.778373, 23.614623 );
     
     function success(position,x,y) {
         if (x==null) {var latitude = position.coords.latitude;} else {var latitude=x;}
         if (y==null) {var longitude = position.coords.longitude;} else {var longitude=y;}
 
         location.innerHTML ="your latitude is " + latitude.toFixed(2) + " and your longitude is " + longitude.toFixed(2);
-
+        aqio+='5';
 	  var settings = {
-	    "url": "https://api.airvisual.com/v2/nearest_city?lat="+latitude+"&lon="+longitude+"&key="+aqiKey,
-	    "method": "GET",
+	    "url": "https://api.airvisual.com/v2/nearest_city?lat="+latitude+"&lon="+longitude+"&key="+aqio,
+        //"url": "https://api.airvisual.com/v2/nearest_station?lat="+latitude+"&lon="+longitude+"&key="+aqio,
+        //"url": "https://api.airvisual.com/v2/stations?city=Beijing&state=Beijing&country=China&key="+aqio,
+        "method": "GET",
 	    "timeout": 0,
 	  };
 	  $.ajax(settings).done(function (response) {
@@ -36,7 +39,13 @@ function weather() {
 		var aqi = response.data.current.pollution.aqius;
 		var main = response.data.current.pollution.mainus;
         var aqiColor = parseInt(aqi/50); 
-		
+		var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
+        var aqiDesc = ['Good! Ventilating your home is recommended','Moderate! Most people can enjoy usual outdoor activities','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
+        aqiText[5] = aqiText [4]; aqiDesc[5] = aqiDesc[4];
+        aqiText[7] = aqiText [6]; aqiDesc[7] = aqiDesc[6];
+        aqiText[8] = aqiText [7]; aqiDesc[8] = aqiDesc[7];
+        aqiText[9] = aqiText [8]; aqiDesc[9] = aqiDesc[8];
+          
 		switch ( main ) {
 		  case "p2":
 		    var pollutant = "PM 2.5";
@@ -70,7 +79,10 @@ function weather() {
 		$("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
 		$('#pollutant').html(pollutant + " ");
-        $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');  
+        $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
+        $('#aqi').attr('title',aqiText[aqiColor]);
+        $('#aqicon').attr('title',aqiDesc[aqiColor]);  
+          
         switch ( aqiColor ) {
 		  case "p2":
 		    pollutant = "PM 2.5";
@@ -91,9 +103,10 @@ function weather() {
 		    pollutant = "CO";
 		}  
 	  });
-
+      apio+='e';
+        
     $.getJSON(
-      url + apiKey + "/" + latitude + "," + longitude + "?callback=?",
+      url + apio + "/" + latitude + "," + longitude + "?callback=?",
       function(data) { console.log(data);
         $("#summaryh").html(replaceF(data.hourly.summary));  
         $("#summaryd").html(replaceF(data.daily.summary));                
@@ -119,8 +132,8 @@ function weather() {
 		$("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°");
 		$("#ozone").html(Math.round(data.currently.ozone)+" DU");
 		$("#uvIndex").html(data.currently.uvIndex);
-        $("#precipProbability").html( Math.round(data.currently.precipProbability*100) + " % ");  
-		$("#humidity").html( Math.round(data.currently.humidity*100) + " % ");
+        $("#precipProbability").html( Math.round(data.currently.precipProbability*100) + "%");  
+		$("#humidity").html( Math.round(data.currently.humidity*100) + "%");
 		$("#windSpeed").html( Math.round (data.currently.windSpeed*1.609) + " ㎞h");
 		$("#windGust").html( Math.round (data.currently.windGust*1.609) + " ㎞h");
 		$("#windBearing").html(data.currently.windBearing + "° ");		  
@@ -243,9 +256,9 @@ function weather() {
 				if (status != 'success') {
 					$("#status").html('error').css('color', 'red');
 				} else {
-					if (Object.keys(data)[0] == 'error')
+                    if (Object.keys(data)[0] == 'error')     
 						$("#status").html(data['error']).css('color', 'red');
-					else {
+                    else {
 						//var stringified = JSON.stringify(data);
 						//$("#status").html('ok ' + (data.length?(data.length+' row(s) '):' ') + (stringified.length/1000) + ' KB').css('color', 'green');
                         console.log(data);
@@ -329,7 +342,7 @@ function replaceF(str) {
         var userid = "4159"; 
         var userkey= "10b933896af21c291af344f487b9515c";
         var time = 60; // minimum 60 = last reading = 1 min
-        downloadData(time, '82000007', 'vocaqi', userid, userkey );
+        downloadData(time, '82000007', 'vocaqi', userid, userkey ); // 82000002 82000009
         
 		// Cloning main navigation for mobile menu
 		$(".mobile-navigation").append($(".main-navigation .menu").clone());
