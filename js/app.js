@@ -38,6 +38,7 @@ function weather() {
 	    console.log(response); 
 		var aqi = response.data.current.pollution.aqius;
 		var main = response.data.current.pollution.mainus;
+        var mainChina = response.data.current.pollution.maincn;
         var aqiColor = parseInt(aqi/50); 
 		var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
         var aqiDesc = ['Good! Ventilating your home is recommended','Moderate! Most people can enjoy usual outdoor activities','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
@@ -45,7 +46,8 @@ function weather() {
         aqiText[7] = aqiText [6]; aqiDesc[7] = aqiDesc[6];
         aqiText[8] = aqiText [7]; aqiDesc[8] = aqiDesc[7];
         aqiText[9] = aqiText [8]; aqiDesc[9] = aqiDesc[8];
-          
+        
+        var mainTitle="Main pollutant";
 		switch ( main ) {
 		  case "p2":
 		    var pollutant = "PM 2.5";
@@ -66,7 +68,29 @@ function weather() {
 		    var pollutant = "CO";
 		}
 		
-		/* units": { //object containing units information
+        if (main!=mainChina) {
+            mainTitle+="s";
+            switch ( mainChina ) {
+              case "p2":
+                pollutant+= " PM 2.5";
+                break;
+              case "p1":
+                pollutant+= " PM 10";
+                break;
+              case "o3":
+                pollutant+= " Ozone";
+                break;
+              case "n2":
+                pollutant+= " NO2";
+                break;
+              case "s2":
+                pollutant+= " SO2";
+                break;
+              case "co":
+                pollutant+= " CO";
+            }
+        }
+   /* "units": { //object containing units information
       "p2": "ugm3", //pm2.5
       "p1": "ugm3", //pm10
       "o3": "ppb", //Ozone O3
@@ -75,13 +99,16 @@ function weather() {
       "co": "ppm" //Carbon monoxide CO */
 		
 		$("#city").html( response.data.city );
-        $("#country").html ( response.data.country );  
-		$("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
-		$('#aqi').addClass("aqiColor"+aqiColor);
+        $("#country").html ( response.data.country );
+        $('#exhaust').attr('title',mainTitle);    
 		$('#pollutant').html(pollutant + " ");
+        $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
+		$('#aqi').addClass("aqiColor"+aqiColor);
+        $('#aqi').attr('title','Strada Dâmboviţei, Aurel Vlaicu');  
+        //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
-        $('#aqi').attr('title',aqiText[aqiColor]);
-        $('#aqicon').attr('title',aqiDesc[aqiColor]);  
+        $('#aqicon').attr('title',aqiText[aqiColor]);
+          
           
         switch ( aqiColor ) {
 		  case "p2":
@@ -143,21 +170,23 @@ function weather() {
 		$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
 		$("#icon").attr('src','images/icons/' + data.currently.icon + '.svg');
         $("#summary").html(data.currently.summary);
-        if (data.alerts.length>0) {
-            $("#alert0").html(data.alerts[0].description);
-            $("#alert0date").html(toDate(data.alerts[0].time));
-            $("#alert0title").html("Weather Alert");
+        if (typeof data.alerts != 'undefined') {              
+            if (data.alerts.length>0) {
+                $("#alert0").html(data.alerts[0].description);
+                $("#alert0date").html(toDate(data.alerts[0].time));
+                $("#alert0title").html("Weather Alert");
+            }
+            if (data.alerts.length>1) {
+                $("#alert1").html(data.alerts[1].description);
+                $("#alert1date").html(toDate(data.alerts[1].time));                 
+                $("#alert1title").html("Weather Alert");
+            }
+            if (data.alerts.length>2) {              
+                $("#alert2").html(data.alerts[2].description);
+                $("#alert2date").html(toDate(data.alerts[2].time));
+                $("#alert2title").html("Weather Alert");
+            }
         }
-        if (data.alerts.length>1) {
-            $("#alert1").html(data.alerts[1].description);
-            $("#alert1date").html(toDate(data.alerts[1].time));                 
-            $("#alert1title").html("Weather Alert");
-        }
-        if (data.alerts.length>2) {              
-            $("#alert2").html(data.alerts[2].description);
-            $("#alert2date").html(toDate(data.alerts[2].time));
-            $("#alert2title").html("Weather Alert");
-        }              
       }
     );
   }
@@ -245,7 +274,7 @@ function weather() {
 		});
 	}
     */
-	function downloadData(time, id, sensor, u, k) {
+	function downloadData(time, id, sensor, u, k, vocid) {
 		$("#status").html('loading').css('color', 'magenta');
 		$.ajax({
 		    	type: 'GET',
@@ -256,15 +285,27 @@ function weather() {
 				if (status != 'success') {
 					$("#status").html('error').css('color', 'red');
 				} else {
-                    if (Object.keys(data)[0] == 'error')     
+                    if ( (Object.keys(data)[0] == 'error') || (typeof data[0]=='undefined') )      
 						$("#status").html(data['error']).css('color', 'red');
                     else {
 						//var stringified = JSON.stringify(data);
 						//$("#status").html('ok ' + (data.length?(data.length+' row(s) '):' ') + (stringified.length/1000) + ' KB').css('color', 'green');
                         console.log(data);
-                        var vocaqi=data[0].vocaqi;
-                        $('#vocaqi').html("&nbsp;"+vocaqi+"&nbsp;");
-                        $('#vocaqi').addClass("aqiColor"+parseInt(vocaqi/50));
+                        $('#molecule').attr('src','images/molecule.svg').attr('title','Volatile organic compounds');
+                        var vocaqi=data[0].vocaqi, voclat=data[0].latitude, voclong=data[0].longitude;
+                        var vocaddr='';
+                        
+                        
+                        $.ajax({type: 'GET', url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + voclat + "&lon=" + voclong, dataType: 'json', headers: { 'Content-Type' : 'text/plain' }, 
+                                success: function(locdata, status) { 
+                                    console.log(locdata);
+                                    if (status=='success') $('#vocaqi'+vocid).attr('title',locdata.address.road+", "+locdata.address.suburb);
+                                    //$('#vocaqi'+vocid).attr('title',locdata.display_name);
+                                }
+                        }); 
+                        
+                        $('#vocaqi'+vocid).html("&nbsp;"+vocaqi+"&nbsp;").addClass("aqiColor"+parseInt(vocaqi/50));
+        
 					}
 				}
 		    	},
@@ -342,7 +383,9 @@ function replaceF(str) {
         var userid = "4159"; 
         var userkey= "10b933896af21c291af344f487b9515c";
         var time = 60; // minimum 60 = last reading = 1 min
-        downloadData(time, '82000007', 'vocaqi', userid, userkey ); // 82000002 82000009
+        downloadData(time, '82000002', 'vocaqi', userid, userkey, 0 ); // 82000002 82000009
+        downloadData(time, '82000007', 'vocaqi', userid, userkey, 1 );
+        downloadData(time, '82000009', 'vocaqi', userid, userkey, 2 );
         
 		// Cloning main navigation for mobile menu
 		$(".mobile-navigation").append($(".main-navigation .menu").clone());
