@@ -1295,7 +1295,7 @@ form textarea {
         font-size: 6.4285714286rem;
         margin-right: 30px; }
       .forecast-container .forecast.today span {
-        margin-right: 10px; }
+        margin-right: 3px; }
         .forecast-container .forecast.today span img {
           margin-right: 5px;
           vertical-align: middle; }
@@ -1719,7 +1719,9 @@ form textarea {
 /* 
  * AQI 
  */
-.aqiColor0, .aqiColor1, .aqiColor2, .aqiColor3, .aqiColor4, .aqiColor5, .aqiColor6, .aqiColor7, .aqiColor8, .aqiColor9 { color: black; margin-left:2em; }
+#pollutant { font-size:0.8em;}
+
+.aqiColor0, .aqiColor1, .aqiColor2, .aqiColor3, .aqiColor4, .aqiColor5, .aqiColor6, .aqiColor7, .aqiColor8, .aqiColor9 { color: black; margin-left:4px; }
 
 #vocaqi { margin-left:0.5em; font-size: 1.6em;}
 
