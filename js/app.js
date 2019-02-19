@@ -11,7 +11,41 @@ function showCountryMap () {
     $("#countryMap").html('<iframe src="http://www.calitateaer.ro/PROXY/QUALITY_INDEX/" style="border:0px #ffffff none;" id="aqiMapRo" class="aqiMap" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" height="400px" width="500px" allowfullscreen></iframe>'); 
     $("#showCountryMap").addClass('hid');
 }
-									
+
+var targets = $( '[rel~=tooltip]' ), target  = false, tooltip = false, title   = false;
+targets.bind( 'mouseenter', function() {
+    target  = $( this );
+    tip     = target.attr( 'title' );
+    tooltip = $( '<div id="tooltip"></div>' );
+    if( !tip || tip == '' ) return false;
+    target.removeAttr( 'title' );
+    tooltip.css( 'opacity', 0 ).html( tip ).appendTo( 'body' );
+    var init_tooltip = function() {
+        if( $( window ).width() < tooltip.outerWidth() * 1.5 ) tooltip.css( 'max-width', $( window ).width() / 2 );
+        else tooltip.css( 'max-width', 340 );
+        var pos_left = target.offset().left + ( target.outerWidth() / 2 ) - ( tooltip.outerWidth() / 2 ),
+            pos_top  = target.offset().top - tooltip.outerHeight() - 20;
+        if( pos_left < 0 ) {
+            pos_left = target.offset().left + target.outerWidth() / 2 - 20; tooltip.addClass( 'left' );}
+        else tooltip.removeClass( 'left' );
+        if( pos_left + tooltip.outerWidth() > $( window ).width() ) { pos_left = target.offset().left - tooltip.outerWidth() + target.outerWidth() / 2 + 20; tooltip.addClass( 'right' );}
+        else tooltip.removeClass( 'right' );
+        if( pos_top < 0 ) {
+            var pos_top  = target.offset().top + target.outerHeight();tooltip.addClass( 'top' );}
+        else tooltip.removeClass( 'top' );
+        tooltip.css( { left: pos_left, top: pos_top } ) .animate( { top: '+=10', opacity: 1 }, 50 );
+    };
+    init_tooltip();
+    $( window ).resize( init_tooltip );
+    var remove_tooltip = function() {
+        tooltip.animate( { top: '-=10', opacity: 0 }, 50, function() {$( this ).remove();});
+        target.attr( 'title', tip );
+    };
+    target.bind( 'mouseleave', remove_tooltip );
+    tooltip.bind( 'click', remove_tooltip );
+});
+
+
 function weather() {
     'use strict';
     
@@ -40,8 +74,8 @@ function weather() {
 		var main = response.data.current.pollution.mainus;
         var mainChina = response.data.current.pollution.maincn;
         var aqiColor = parseInt(aqi/50); 
-		var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
-        var aqiDesc = ['Good! Ventilating your home is recommended','Moderate! Most people can enjoy usual outdoor activities','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
+		var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations.','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected.','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
+        var aqiDesc = ['Good! Ventilating your home is recommended.','Moderate! Most people can enjoy usual outdoor activities.','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
         aqiText[5] = aqiText [4]; aqiDesc[5] = aqiDesc[4];
         aqiText[7] = aqiText [6]; aqiDesc[7] = aqiDesc[6];
         aqiText[8] = aqiText [7]; aqiDesc[8] = aqiDesc[7];
@@ -104,7 +138,7 @@ function weather() {
 		$('#pollutant').html(pollutant + " ");
         $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
-        $('#aqi').attr('title','Strada Dâmboviţei, Aurel Vlaicu');  
+        $('#aqi').attr('title','AQI in Strada Dâmboviţei, Aurel Vlaicu');  
         //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
         $('#aqicon').attr('title',aqiText[aqiColor]);
@@ -291,7 +325,7 @@ function weather() {
 						//var stringified = JSON.stringify(data);
 						//$("#status").html('ok ' + (data.length?(data.length+' row(s) '):' ') + (stringified.length/1000) + ' KB').css('color', 'green');
                         console.log(data);
-                        $('#molecule').attr('src','images/molecule.svg').attr('title','Volatile organic compounds');
+                        $('#molecule').attr('src','images/molecule.svg').attr('title','Volatile organic compounds (VOCs)');
                         var vocaqi=data[0].vocaqi, voclat=data[0].latitude, voclong=data[0].longitude;
                         var vocaddr='';
                         
@@ -299,7 +333,7 @@ function weather() {
                         $.ajax({type: 'GET', url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + voclat + "&lon=" + voclong, dataType: 'json', headers: { 'Content-Type' : 'text/plain' }, 
                                 success: function(locdata, status) { 
                                     console.log(locdata);
-                                    if (status=='success') $('#vocaqi'+vocid).attr('title',locdata.address.road+", "+locdata.address.suburb);
+                                    if (status=='success') $('#vocaqi'+vocid).attr('title','VOCsQI in '+locdata.address.road+', '+locdata.address.suburb);
                                     //$('#vocaqi'+vocid).attr('title',locdata.display_name);
                                 }
                         }); 
