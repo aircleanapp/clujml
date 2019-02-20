@@ -1802,3 +1802,11 @@ form textarea {
     left: auto;
     margin: 0;
 }
+
+.is-invisible {
+  opacity: 0;
+}
+
+.subscription-details {
+  transition: opacity 1s;
+}
