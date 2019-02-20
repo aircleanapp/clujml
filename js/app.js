@@ -84,10 +84,10 @@ function weather() {
         var mainTitle="Main pollutant";
 		switch ( main ) {
 		  case "p2":
-		    var pollutant = "PM 2.5";
+		    var pollutant = "PM2.5";
 		    break;
 		  case "p1":
-		    var pollutant = "PM 10";
+		    var pollutant = "PM10";
 		    break;
 		  case "o3":
 		    var pollutant = "Ozone";
@@ -106,10 +106,10 @@ function weather() {
             mainTitle+="s";
             switch ( mainChina ) {
               case "p2":
-                pollutant+= " PM 2.5";
+                pollutant+= " PM2.5";
                 break;
               case "p1":
-                pollutant+= " PM 10";
+                pollutant+= " PM10";
                 break;
               case "o3":
                 pollutant+= " Ozone";
@@ -141,28 +141,7 @@ function weather() {
         $('#aqi').attr('title','AQI in Strada Dâmboviţei, Aurel Vlaicu');  
         //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
-        $('#aqicon').attr('title',aqiText[aqiColor]);
-          
-          
-        switch ( aqiColor ) {
-		  case "p2":
-		    pollutant = "PM 2.5";
-		    break;
-		  case "p1":
-		    pollutant = "PM 10";
-		    break;
-		  case "o3":
-		    pollutant = "Ozone";
-		    break;
-		  case "n2":
-		    pollutant = "NO2";
-		    break;
-		  case "s2":
-		    pollutant = "SO2";
-		    break;
-		  case "co":
-		    pollutant = "CO";
-		}  
+        $('#aqicon').attr('title',aqiText[aqiColor]);  
 	  });
       apio+='e';
         
@@ -171,26 +150,31 @@ function weather() {
       function(data) { console.log(data);
         $("#summaryh").html(replaceF(data.hourly.summary));  
         $("#summaryd").html(replaceF(data.daily.summary));                
-        $("#day2tempHigh").html(toC(data.daily.data[2].temperatureHigh)+"°");
-        $("#day2tempLow").html(toC(data.daily.data[2].temperatureLow)+"°");
-        $("#day3tempHigh").html(toC(data.daily.data[3].temperatureHigh)+"°");
-        $("#day3tempLow").html(toC(data.daily.data[3].temperatureLow)+"°");
-        $("#day4tempHigh").html(toC(data.daily.data[4].temperatureHigh)+"°");
-        $("#day4tempLow").html(toC(data.daily.data[4].temperatureLow)+"°");
-        $("#day5tempHigh").html(toC(data.daily.data[5].temperatureHigh)+"°");
-        $("#day5tempLow").html(toC(data.daily.data[5].temperatureLow)+"°");
-        $("#day6tempHigh").html(toC(data.daily.data[6].temperatureHigh)+"°");
-        $("#day6tempLow").html(toC(data.daily.data[6].temperatureLow)+"°");
-        $("#day7tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°");
-        $("#day7tempLow").html(toC(data.daily.data[7].temperatureLow)+"°");
-        $("#day2icon").attr('src','images/icons/' + data.daily.data[2].icon + '.svg');
-        $("#day3icon").attr('src','images/icons/' + data.daily.data[3].icon + '.svg');
-        $("#day4icon").attr('src','images/icons/' + data.daily.data[4].icon + '.svg');
-        $("#day5icon").attr('src','images/icons/' + data.daily.data[5].icon + '.svg');
-        $("#day6icon").attr('src','images/icons/' + data.daily.data[6].icon + '.svg');
-        $("#day7icon").attr('src','images/icons/' + data.daily.data[7].icon + '.svg');
+        $("#day2tempHigh").html(toC(data.daily.data[1].temperatureHigh)+"°");
+        $("#day2tempLow").html(toC(data.daily.data[1].temperatureLow)+"°");
+        $("#day3tempHigh").html(toC(data.daily.data[2].temperatureHigh)+"°");
+        $("#day3tempLow").html(toC(data.daily.data[2].temperatureLow)+"°");
+        $("#day4tempHigh").html(toC(data.daily.data[3].temperatureHigh)+"°");
+        $("#day4tempLow").html(toC(data.daily.data[3].temperatureLow)+"°");
+        $("#day5tempHigh").html(toC(data.daily.data[4].temperatureHigh)+"°");
+        $("#day5tempLow").html(toC(data.daily.data[4].temperatureLow)+"°");
+        $("#day6tempHigh").html(toC(data.daily.data[5].temperatureHigh)+"°");
+        $("#day6tempLow").html(toC(data.daily.data[5].temperatureLow)+"°");
+        $("#day7tempHigh").html(toC(data.daily.data[6].temperatureHigh)+"°");
+        $("#day7tempLow").html(toC(data.daily.data[6].temperatureLow)+"°");
+        //$("#day8tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°");
+        //$("#day8tempLow").html(toC(data.daily.data[7].temperatureLow)+"°");              
+        $("#day2icon").attr({src: 'images/icons/' + data.daily.data[1].icon + '.svg', title: data.daily.data[1].summary });
+        $("#day3icon").attr({src: 'images/icons/' + data.daily.data[2].icon + '.svg', title: data.daily.data[2].summary });
+        $("#day4icon").attr({src: 'images/icons/' + data.daily.data[3].icon + '.svg', title: data.daily.data[3].summary });
+        $("#day5icon").attr({src: 'images/icons/' + data.daily.data[4].icon + '.svg', title: data.daily.data[4].summary });
+        $("#day6icon").attr({src: 'images/icons/' + data.daily.data[5].icon + '.svg', title: data.daily.data[5].summary });
+        $("#day7icon").attr({src: 'images/icons/' + data.daily.data[6].icon + '.svg', title: data.daily.data[6].summary });
+        //$("#day8icon").attr({src: 'images/icons/' + data.daily.data[7].icon + '.svg', title: data.daily.data[7].summary });
         $("#temp").html( toC(data.currently.temperature) + "°");
-		$("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°");
+		$("#tempMax").html(toC(data.daily.data[0].temperatureMax) + "°");
+        $("#tempMin").html(toC(data.daily.data[0].temperatureMin) + "°..");
+        $("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°");
 		$("#ozone").html(Math.round(data.currently.ozone)+" DU");
 		$("#uvIndex").html(data.currently.uvIndex);
         $("#precipProbability").html( Math.round(data.currently.precipProbability*100) + "%");  
