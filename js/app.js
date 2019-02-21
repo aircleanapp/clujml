@@ -1,5 +1,13 @@
 'use strict';
 
+var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations.','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected.','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
+var aqiDesc = ['Good! Ventilating your home is recommended.','Moderate! Most people can enjoy usual outdoor activities.','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
+aqiText[5] = aqiText [4]; aqiDesc[5] = aqiDesc[4];
+aqiText[7] = aqiText [6]; aqiDesc[7] = aqiDesc[6];
+aqiText[8] = aqiText [7]; aqiDesc[8] = aqiDesc[7];
+aqiText[9] = aqiText [8]; aqiDesc[9] = aqiDesc[8];
+        
+
 const applicationServerPublicKey = 'BIHLaa69coLJ7sQ2_2Ya5NTMovYrVCMpt489hLDgEETRt-wxWdatorJzUehq_shAdVbzdrsAHOZp7iISqIdzTtE';
 const pushButton = document.querySelector('.js-push-btn');
 let isSubscribed = false;
@@ -160,7 +168,7 @@ function showCountryMap () {
 var targets = $( '[rel~=tooltip]' ), target  = false, tooltip = false, title   = false;
 targets.bind( 'mouseenter', function() {
     target  = $( this );
-    tip     = target.attr( 'title' );
+    var tip = target.attr( 'title' );
     tooltip = $( '<div id="tooltip"></div>' );
     if( !tip || tip == '' ) return false;
     target.removeAttr( 'title' );
@@ -215,18 +223,7 @@ function weather() {
 	  };
 	  $.ajax(settings).done(function (response) {
 	    console.log(response); 
-		var aqi = response.data.current.pollution.aqius;
-		var main = response.data.current.pollution.mainus;
-        var mainChina = response.data.current.pollution.maincn;
-        var aqiColor = parseInt(aqi/50); 
-		var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations.','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected.','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
-        var aqiDesc = ['Good! Ventilating your home is recommended.','Moderate! Most people can enjoy usual outdoor activities.','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
-        aqiText[5] = aqiText [4]; aqiDesc[5] = aqiDesc[4];
-        aqiText[7] = aqiText [6]; aqiDesc[7] = aqiDesc[6];
-        aqiText[8] = aqiText [7]; aqiDesc[8] = aqiDesc[7];
-        aqiText[9] = aqiText [8]; aqiDesc[9] = aqiDesc[8];
-        
-        var mainTitle="Main pollutant";
+		var aqi = response.data.current.pollution.aqius, main = response.data.current.pollution.mainus, mainChina = response.data.current.pollution.maincn, aqiColor = parseInt(aqi/50), mainTitle="Main pollutant";
 		switch ( main ) {
 		  case "p2":
 		    var pollutant = "PM2.5";
@@ -283,7 +280,7 @@ function weather() {
 		$('#pollutant').html(pollutant + " ");
         $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
-        $('#aqi').attr('title','AQI in Strada Dâmboviţei, Aurel Vlaicu');  
+        $('#aqi').attr('title','Official AQI in Str. Dâmboviţei, Mărăști');  
         //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
         $('#aqicon').attr('title',aqiText[aqiColor]);  
@@ -455,20 +452,17 @@ function weather() {
 						//$("#status").html('ok ' + (data.length?(data.length+' row(s) '):' ') + (stringified.length/1000) + ' KB').css('color', 'green');
                         console.log(data);
                         $('#molecule').attr('src','images/molecule.svg').attr('title','Volatile organic compounds (VOCs)');
-                        var vocaqi=data[0].vocaqi, voclat=data[0].latitude, voclong=data[0].longitude;
-                        var vocaddr='';
-                        
-                        
+                        var vocaqi=data[0].vocaqi, voclat=data[0].latitude, voclong=data[0].longitude, vocaddr='';
                         $.ajax({type: 'GET', url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + voclat + "&lon=" + voclong, dataType: 'json', headers: { 'Content-Type' : 'text/plain' }, 
                                 success: function(locdata, status) { 
                                     console.log(locdata);
-                                    if (status=='success') $('#vocaqi'+vocid).attr('title','VOCsQI in '+locdata.address.road+', '+locdata.address.suburb);
+                                    if (status=='success') $('#vocaqi'+vocid).attr('title','Live VOCs level in '+locdata.address.road.replace("Strada", "Str.").replace("Sergiu Celibidache", "Celibidache")+', '+locdata.address.suburb.replace("Europa","Zorilor").replace("Aurel Vlaicu","Mărăști"));
                                     //$('#vocaqi'+vocid).attr('title',locdata.display_name);
                                 }
-                        }); 
-                        
-                        $('#vocaqi'+vocid).html("&nbsp;"+vocaqi+"&nbsp;").addClass("aqiColor"+parseInt(vocaqi/50));
-        
+                        });
+                        var vocaqiColor = parseInt(vocaqi/50);
+                        $('#vocaqi'+vocid).html("&nbsp;"+vocaqi+"&nbsp;").addClass("aqiColor"+vocaqiColor);
+                        $('#vocaqicon'+vocid).attr({src: 'images/icons/' + vocaqiColor + '.svg', title: aqiText[vocaqiColor] });
 					}
 				}
 		    	},
