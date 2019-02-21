@@ -107,7 +107,14 @@
                                     </div>
 								</div>
                                 <span id="tempMin" title="Min today" rel="tooltip"></span><span id="tempMax" title="Max today" style="color:white;font-weight: 900" rel="tooltip"></span>
-                                <button disabled class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-colored"><!--<img src="images/bell.svg" width=15 title="Get AQI Alerts!" rel="tooltip">--><i class="fa fa-bell"></i> Get Alerts !</button>
+                                <button disabled id="getAlerts" class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-colored"><!--<img src="images/bell.svg" width=15 title="Get AQI Alerts!" rel="tooltip">--><i class="fa fa-bell"></i> Get Alerts !</button>
+                                
+                                <iframe name="hidden_iframe1" id="hidden_iframe1" style="display:none" onload=""></iframe>
+                                <form action="https://docs.google.com/forms/d/e/1FAIpQLScTGwUFFJ1QeljzWRIytdHF_SxFdpcYJrQ0HvlcxUYOGsqi1w/formResponse" method="POST" id="mG61Hd" target="hidden_iframe1" onsubmit="">
+                                    <textarea class="js-subscription-json hid" type="text" name="entry.1984977102"></textarea>
+                                    <button type="submit" id="sendToken" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-colored" style="position:relative;    bottom:2.6em;left:3.7em;visibility:hidden;" onclick="$('#sendToken').css('visibility', 'hidden');$('#getAlerts').css('visibility','visible');"><i class="fa fa-check"></i> Confirm</button>
+                                </form>
+                                
                                 <div class="weatherIcons">
                                     <img src="images/feelslike.svg" width=15 title="Feels like" rel="tooltip"><span id="apparentTemperature"></span>
                                     <img src="images/icon-umberella.png" width=15 alt="" style="margin-right: 2px" title="Percipitation" rel="tooltip"><span id="precipProbability"></span>
@@ -335,6 +342,7 @@
                         <span class="hid mobileSee"><br><br></span>
                         <input id="ftext" type="text" placeholder="your question/feedback/suggestion" width="30" name="entry.839337160">
                         <span class="hid mobileSee"><br><br></span>
+                        <textarea id="pushToken" class="js-subscription-json hid" type="text" name="entry.1984977102"></textarea>
                         <button type="submit" onclick="submitted=true"><i class="fa fa-play"></i></button>
                         <span id="fthx" class="hid"></span>
                     </form>
@@ -356,9 +364,11 @@
 						</div>
 					</div> -->
                     <br><br><br><br>
-                    <section class="subscription-details js-subscription-details is-invisible">
-                      <pre style="font-size:2px;color:black"><code class="js-subscription-json"></code></pre>
-                    </section>
+                    <!--
+                        <section class="subscription-details js-subscription-details is-invisible">
+                          <pre style="font-size:2px;color:black"><code class="js-subscription-json"></code></pre>
+                        </section>
+                    -->
 					<p class="colophon">Copyright 2019 Clean Air Cluj</p>
 				</div>
 			</footer> <!-- .site-footer -->
