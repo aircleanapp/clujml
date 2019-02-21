@@ -24,14 +24,16 @@
 self.addEventListener('push', function(event) {
   console.log('[Service Worker] Push Received.');
   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
-
   const title = 'Clean Air Cluj';
+  var t = event.data.text();
+  var c = Math.floor(parseInt(t)/50);
   const options = {
-    body: event.data.text(),
-    icon: 'images/air-bad.png', //'images/icon.png',
-    badge: 'images/air-bad.png'
+    body: t,
+    icon: 'images/icons/' + c + '.svg',
+    badge: 'images/air-bad.png',
+    "vibrate": [200, 100, 200, 100, 200, 100, 400]
+    /* , "tag": "request", "actions": [ { "action": "yes", "title": "Yes", "icon": "images/y.png" },{ "action": "no", "title": "No", "icon": "images/.." } ] */ 
   };
-
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
