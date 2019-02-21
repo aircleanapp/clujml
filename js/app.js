@@ -77,9 +77,9 @@ function updateSubscriptionOnServer(subscription) {
 
   if (subscription) {
     subscriptionJson.textContent = JSON.stringify(subscription);
-    subscriptionDetails.classList.remove('is-invisible');
+    //subscriptionDetails.classList.remove('is-invisible');
   } else {
-    subscriptionDetails.classList.add('is-invisible');
+    //subscriptionDetails.classList.add('is-invisible');
   }
 }
 
@@ -131,6 +131,8 @@ function initializeUI() {
         unsubscribeUser();
       } else {
         subscribeUser();
+        $('#sendToken').css('visibility', 'visible');
+        $('#getAlerts').css('visibility','hidden');
       }
   });
 
