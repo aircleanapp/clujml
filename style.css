@@ -980,6 +980,7 @@ form textarea {
     }
     .forecast-icon img {
         width: 36px;
+        vertical-align: -webkit-baseline-middle;
     }
     
   .visible-xs {
@@ -1324,8 +1325,8 @@ form textarea {
         font-size: 16px;
         font-size: 1.1428571429em; }
 
-.fullwidth-block {
-  padding: 70px 0; }
+.fullwidth-block { padding: 70px 0; }
+#weatherAlerts { padding: 0 0; }
   .fullwidth-block .section-title {
     font-size: 36px;
     font-size: 2.5714285714em;

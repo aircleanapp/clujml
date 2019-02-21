@@ -7,8 +7,8 @@
 		
 		<title>Clean Air Cluj</title>
 
-		<!-- Loading third party fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<!-- Loading third party fonts 
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">-->
 		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
 
@@ -95,9 +95,9 @@
                                 <span id="summary"></span>
 						        <span class="hid mobileSee"><br></span>
                                 <img id="exhaust" src="images/exhaust.svg" width=30 rel="tooltip"><span id="pollutant"></span>
-                                <img id="molecule" src="" width=30 rel="tooltip"><span id="vocaqi0" rel="tooltip"></span><span id="vocaqi1" rel="tooltip"></span><span id="vocaqi2" rel="tooltip"></span>
+                                <img id="molecule" src="" width=30 rel="tooltip"><span id="vocaqi0" rel="tooltip"></span><img id="vocaqicon0" src="" width=15 rel="tooltip"><span id="vocaqi1" rel="tooltip"></span><img id="vocaqicon1" src="" width=15 rel="tooltip"><span id="vocaqi2" rel="tooltip"></span><img id="vocaqicon2" src="" width=15 rel="tooltip">
 								<div class="degree">
-									<span id="temp" title="Current" rel="tooltip"></span><!--<div class="num">23<sup>o</sup>C</div>-->
+									<span id="temp" title="Now" rel="tooltip"></span><!--<div class="num">23<sup>o</sup>C</div>-->
                                     <div class="forecast-icon">
 										<img id="icon" src="" alt="" width=50>
 									</div>
@@ -106,7 +106,7 @@
                                         <img id="aqicon" src="" alt="" width=50 rel="tooltip">
                                     </div>
 								</div>
-                                <span id="tempMin" title="Today's min" rel="tooltip"></span><span id="tempMax" title="Today's max" style="color:white;font-weight: 900" rel="tooltip"></span>
+                                <span id="tempMin" title="Min today" rel="tooltip"></span><span id="tempMax" title="Max today" style="color:white;font-weight: 900" rel="tooltip"></span>
                                 <button disabled class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-colored"><!--<img src="images/bell.svg" width=15 title="Get AQI Alerts!" rel="tooltip">--><i class="fa fa-bell"></i> Get Alerts !</button>
                                 <div class="weatherIcons">
                                     <img src="images/feelslike.svg" width=15 title="Feels like" rel="tooltip"><span id="apparentTemperature"></span>
@@ -219,7 +219,7 @@
 							<div class="col-sm-6">
 								<div class="live-camera">
                                     <span id="worldMap"></span>
-                                    <h3 class="location">World</h3><button type="button" id="showWorldMap" onclick="showWorldMap()"> Show Map</button>
+                                    <h3 class="location">World</h3><button type="button" class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-colored" id="showWorldMap" onclick="showWorldMap()"> Show Map</button>
                                 </div>
 							</div>
                             <!--
@@ -242,7 +242,7 @@
 					</div>
 				</div>
 
-				<div class="fullwidth-block" data-bg-color="#262936">
+				<div id="weatherAlerts" class="fullwidth-block" data-bg-color="#262936">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-4">
