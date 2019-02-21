@@ -25,12 +25,12 @@ self.addEventListener('push', function(event) {
   console.log('[Service Worker] Push Received.');
   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
   const title = 'Clean Air Cluj';
-  var t = event.data.text();
-  var c = Math.floor(parseInt(t)/50);
+  var i = 'images/logo@2x.png', t = event.data.text(), n = (parseInt(t));
+  if (!isNaN(n)) { if (n>=500) n=499; i = 'images/' + Math.floor(n/50) + '.png'; }
   const options = {
     body: t,
-    icon: 'images/icons/' + c + '.svg',
-    badge: 'images/icons/' + c + '.svg',//'images/air-bad.png',
+    icon: i,
+    badge: 'images/air-bad.png',
     "vibrate": [200, 100, 200, 100, 200, 100, 400]
     /* , "tag": "request", "actions": [ { "action": "yes", "title": "Yes", "icon": "images/y.png" },{ "action": "no", "title": "No", "icon": "images/.." } ] */ 
   };
