@@ -67,6 +67,7 @@ self.addEventListener('install', e => {
   );
 });
 
+/* '/images/0.png', '/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png', '/images/5.png', '/images/6.png', '/images/7.png', '/images/8.png', '/images/9.png' */
 
 self.addEventListener('activate', function(e) {
   console.log('[ServiceWorker] Activate');
@@ -117,5 +118,3 @@ self.addEventListener('fetch', function(e) {
     );
   }
 }); 
-
-/* '/images/0.png', '/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png', '/images/5.png', '/images/6.png', '/images/7.png', '/images/8.png', '/images/9.png' */
