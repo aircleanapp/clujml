@@ -22,27 +22,55 @@
 'use strict';
 
 self.addEventListener('push', function(event) {
-  console.log('[Service Worker] Push Received.');
-  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+  console.log(`[Service Worker] Push received: "${event.data.text()}"`);
   const title = 'Clean Air Cluj';
   var i = 'images/logo@2x.png', t = event.data.text(), n = (parseInt(t));
   if (!isNaN(n)) { if (n>=500) n=499; i = 'images/' + Math.floor(n/50) + '.png'; }
   const options = {
     body: t,
     icon: i,
-    badge: 'images/air-bad.png',
-    "vibrate": [200, 100, 200, 100, 200, 100, 400]
-    /* , "tag": "request", "actions": [ { "action": "yes", "title": "Yes", "icon": "images/y.png" },{ "action": "no", "title": "No", "icon": "images/.." } ] */ 
+    badge: 'images/air-bad.png'
+    /* , "vibrate": [200, 100, 200, 100, 200, 100, 400], "tag": "request", "actions": [ { "action": "yes", "title": "Yes", "icon": "images/y.png" },{ "action": "no", "title": "No", "icon": "images/.." } ] */ 
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
 self.addEventListener('notificationclick', function(event) {
   console.log('[Service Worker] Notification click Received.');
-
   event.notification.close();
-
   event.waitUntil(
     clients.openWindow('http://cluj.ml')
   );
 });
+
+const version = "1.16.0";
+const cacheName = `cleanair-${version}`;
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(cacheName).then(cache => {
+      return cache.addAll([
+        `/`,
+        `/index.html`,
+        `/style.css`,
+        `/js/app.js`
+      ])
+          .then(() => self.skipWaiting());
+    })
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', event => {
+  console.log(event.request.url);    
+  event.respondWith(
+    caches.open(cacheName)
+      .then(cache => cache.match(event.request, {ignoreSearch: true}))
+      .then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
