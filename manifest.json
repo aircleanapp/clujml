@@ -1,5 +1,5 @@
 {
-  "short_name": "CleanAir",
+  "short_name": "Clean Air",
   "name": "Clean Air Cluj",
   "icons": [
       {
@@ -39,7 +39,7 @@
        "density": "4.0"
       }
   ],
-  "start_url": "/index.html",
+  "start_url": "/",
   "background_color": "#45B9D8",
   "display": "standalone",
   "scope": "/",
