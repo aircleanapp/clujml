@@ -8,8 +8,9 @@ self.addEventListener('push', function(event) {
   const options = {
     body: t,
     icon: i,
-    badge: 'images/air-bad.png'
-    /* , "vibrate": [200, 100, 200, 100, 200, 100, 400], "tag": "request", "actions": [ { "action": "yes", "title": "Yes", "icon": "images/y.png" },{ "action": "no", "title": "No", "icon": "images/.." } ] */ 
+    badge: 'images/air-bad.png', 
+    "vibrate": [200, 100, 200, 100, 200, 100, 400]
+    /* , "tag": "request", "actions": [ { "action": "yes", "title": "Yes", "icon": "images/y.png" },{ "action": "no", "title": "No", "icon": "images/.." } ] */ 
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
