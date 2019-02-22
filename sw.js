@@ -22,7 +22,7 @@
 'use strict';
 
 self.addEventListener('push', function(event) {
-  console.log(`[Service Worker] Push received: "${event.data.text()}"`);
+  console.log('[Service Worker] Push received: "${event.data.text()}"');
   const title = 'Clean Air Cluj';
   var i = 'images/logo@2x.png', t = event.data.text(), n = (parseInt(t));
   if (!isNaN(n)) { if (n>=500) n=499; i = 'images/' + Math.floor(n/50) + '.png'; }
@@ -44,20 +44,31 @@ self.addEventListener('notificationclick', function(event) {
 });
 
 const version = "1.16.0";
-const cacheName = `cleanair-${version}`;
+const cacheName = 'cleanair-${version}';
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
-        `/`,
-        `/index.html`,
-        `/style.css`,
-        `/js/app.js`
+        '/',
+        '/index.html',
+        '/index.html?home=true',
+        '/style.css',
+        '/js/app.js',
+        '/images/logo.png',
+        '/images/exhaust.svg',
+        '/images/molecule.svg',
+'/images/icons/0.svg','/images/icons/1.svg','/images/icons/2.svg','/images/icons/3.svg','/images/icons/4.svg','/images/icons/5.svg','/images/icons/6.svg','/images/icons/7.svg','/images/icons/8.svg','images/icons/9.svg','/images/icons/clean-night.svg','/images/icons/partly-couldy-night.svg','/images/icons/partly-cloudy-day.svg','/images/icons/partly-cloudy.svg','/images/icons/rain.svg','/images/icons/snow.svg','/images/icons/wind.svg','/images/icons/clear-day.svg','/images/icons/cloudy.svg','/images/icons/fog.svg',
+        '/images/feelslike.svg',
+        '/images/icon-umberella.png', '/images/dewpoint.svg', '/images/waterdrop.svg', '/images/cloudcover.svg', '/images/visibility.svg', '/images/sunblock.svg', '/images/windy.svg', '/images/icon-wind.png', '/images/icon-compass.png', '/images/pressure.svg', '/images/o3-cloud.svg', 
+        '/images/bell.svg',
+        '/images/silent.svg',
+        '/images/0.png', '/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png', '/images/5.png', '/images/6.png', '/images/7.png', '/images/8.png', '/images/9.png'
       ])
           .then(() => self.skipWaiting());
     })
   );
 });
+
 
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
