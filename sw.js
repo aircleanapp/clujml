@@ -43,7 +43,7 @@ self.addEventListener('notificationclick', function(event) {
   );
 });
 
-const version = "1.16.0";
+const version = "1.16.5";
 const cacheName = 'cleanair-${version}';
 self.addEventListener('install', e => {
   e.waitUntil(
