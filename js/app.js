@@ -162,9 +162,24 @@ function showWorldMap () {
     $("#showWorldMap").addClass('hid');
 }
 
-function showCountryMap () {
+/* function showCountryMap () {
     $("#countryMap").html('<iframe src="http://www.calitateaer.ro/PROXY/QUALITY_INDEX/" style="border:0px #ffffff none;" id="aqiMapRo" class="aqiMap" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" height="400px" width="500px" allowfullscreen></iframe>'); 
     $("#showCountryMap").addClass('hid');
+} */
+
+function showVideoEN () {
+    $("#videoEN").html('<iframe width="500px" height="400px" src="https://www.youtube.com/embed/n3DM5scRpns?autoplay=1&start=1&end=80&color=white" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>');
+    $("#showVideoEN").addClass('hid');
+}
+
+function showVideoSP () {
+    $("#videoEN").html('<iframe width="500px" height="400px" src="https://www.youtube.com/embed/Yq7sUVeZ3vk?autoplay=1&start=1&end=80&color=white" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>');
+    $("#showVideoSP").addClass('hid');
+}
+
+function showVideoFR () {
+    $("#videoEN").html('<iframe width="500px" height="400px" src="https://www.youtube.com/embed/fQz1U36Y6ls?autoplay=1&start=1&end=80&color=white" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>');
+    $("#showVideoFR").addClass('hid');
 }
 
 var targets = $( '[rel~=tooltip]' ), target  = false, tooltip = false, title   = false;
@@ -462,7 +477,7 @@ function weather() {
                                     //$('#vocaqi'+vocid).attr('title',locdata.display_name);
                                 }
                         });
-                        var vocaqiColor = parseInt(vocaqi/50);
+                        var vocaqiColor = parseInt(vocaqi/50); if (vocaqiColor>=10) vocaqiColor=9;
                         $('#vocaqi'+vocid).html("&nbsp;"+vocaqi+"&nbsp;").addClass("aqiColor"+vocaqiColor);
                         $('#vocaqicon'+vocid).attr({src: 'images/icons/' + vocaqiColor + '.svg', title: aqiText[vocaqiColor] });
 					}
