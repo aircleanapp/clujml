@@ -51,18 +51,16 @@ self.addEventListener('install', e => {
       return cache.addAll([
         '/',
         '/index.html',
-        '/index.html?home=true',
         '/style.css',
         '/js/app.js',
         '/images/logo.png',
         '/images/exhaust.svg',
         '/images/molecule.svg',
-'/images/icons/0.svg','/images/icons/1.svg','/images/icons/2.svg','/images/icons/3.svg','/images/icons/4.svg','/images/icons/5.svg','/images/icons/6.svg','/images/icons/7.svg','/images/icons/8.svg','images/icons/9.svg','/images/icons/clean-night.svg','/images/icons/partly-couldy-night.svg','/images/icons/partly-cloudy-day.svg','/images/icons/partly-cloudy.svg','/images/icons/rain.svg','/images/icons/snow.svg','/images/icons/wind.svg','/images/icons/clear-day.svg','/images/icons/cloudy.svg','/images/icons/fog.svg',
+'/images/icons/0.svg','/images/icons/1.svg','/images/icons/2.svg','/images/icons/3.svg','/images/icons/4.svg','/images/icons/5.svg','/images/icons/6.svg','/images/icons/7.svg','/images/icons/8.svg','images/icons/9.svg','/images/icons/clear-night.svg','/images/icons/partly-cloudy-night.svg','/images/icons/partly-cloudy-day.svg','/images/icons/partly-cloudy.svg','/images/icons/rain.svg','/images/icons/snow.svg','/images/icons/wind.svg','/images/icons/clear-day.svg','/images/icons/cloudy.svg','/images/icons/fog.svg',
         '/images/feelslike.svg',
         '/images/icon-umberella.png', '/images/dewpoint.svg', '/images/waterdrop.svg', '/images/cloudcover.svg', '/images/visibility.svg', '/images/sunblock.svg', '/images/windy.svg', '/images/icon-wind.png', '/images/icon-compass.png', '/images/pressure.svg', '/images/o3-cloud.svg', 
         '/images/bell.svg',
-        '/images/silent.svg',
-        '/images/0.png', '/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png', '/images/5.png', '/images/6.png', '/images/7.png', '/images/8.png', '/images/9.png'
+        '/images/silent.svg'
       ])
           .then(() => self.skipWaiting());
     })
@@ -70,11 +68,22 @@ self.addEventListener('install', e => {
 });
 
 
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
+self.addEventListener('activate', function(e) {
+  console.log('[ServiceWorker] Activate');
+  e.waitUntil(
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (key !== cacheName && key !== cacheName) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  return self.clients.claim();
+});	
 
-self.addEventListener('fetch', event => {
+/* self.addEventListener('fetch', event => {
   console.log(event.request.url);    
   event.respondWith(
     caches.open(cacheName)
@@ -83,5 +92,30 @@ self.addEventListener('fetch', event => {
       return response || fetch(event.request);
     })
   );
-});
+}); */
 
+self.addEventListener('fetch', function(e) {
+  console.log('[Service Worker] Fetch', e.request.url);
+  var dataUrl = 'api';
+  console.log ('request.url='+e.request.url);
+  if (e.request.url.indexOf(dataUrl) > -1) {
+    e.respondWith(
+      caches.open(cacheName).then(function(cache) { 
+        return fetch(e.request).then(function(response){
+          cache.put(e.request.url, response.clone());
+          return response;
+        });
+      })
+    );
+  } else {
+    e.respondWith(
+      caches.open(cacheName)
+      .then(cache => cache.match(e.request, {ignoreSearch: true}))
+      .then(response => {
+      return response || fetch(e.request);
+      })
+    );
+  }
+}); 
+
+/* '/images/0.png', '/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png', '/images/5.png', '/images/6.png', '/images/7.png', '/images/8.png', '/images/9.png' */
