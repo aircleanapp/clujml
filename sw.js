@@ -24,12 +24,12 @@ self.addEventListener('notificationclick', function(event) {
   }).then(function(clientList) {
     for (var i = 0; i < clientList.length; i++) {
       var client = clientList[i];
-      if (client.url === 'https://cluj.ml' && 'focus' in client) {
+      if (client.url === 'https://cluj.ml/' && 'focus' in client) {
         return client.focus();
       }
     }
     if (clients.openWindow) {
-      return clients.openWindow('https://cluj.ml');
+      return clients.openWindow('https://cluj.ml/');
     }
   }));  
 });
