@@ -18,18 +18,12 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
   console.log('[Service Worker] Notification click Received.');
   event.notification.close();
-  //event.waitUntil(clients.openWindow('https://cluj.ml'));
-  event.waitUntil(clients.matchAll({
-    type: 'window'
-  }).then(function(clientList) {
-    for (var i = 0; i < clientList.length; i++) {
-      var client = clientList[i];
-      if (client.url === 'https://cluj.ml/' && 'focus' in client) {
-        return client.focus();
-      }
-    }
-    if (clients.openWindow) {
-      return clients.openWindow('https://cluj.ml/');
-    }
-  }));  
+  event.waitUntil(clients.openWindow('http://cluj.ml'));
 });
+
+
+
+/* check if window already open and focus on it: event.waitUntil(clients.matchAll({type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {var client = clientList[i];if (client.url === 'https://cluj.ml/' && 'focus' in client) {return client.focus();} }
+    if (clients.openWindow) {return clients.openWindow('https://cluj.ml/');} }));  */
