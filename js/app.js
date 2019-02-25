@@ -55,11 +55,15 @@ function updateBtn() {
   }
 
   if (isSubscribed) {
-    pushButton.innerHTML='<i class="fa fa-bell-o"></i> Stop Alerts';
+    pushButton.innerHTML='<i class="fa fa-hand-paper-o"></i>'; //'<i class="fa fa-bell-o"></i> Stop Alerts';
+    pushButton.classList.remove('mdl-button--raised');
+    pushButton.classList.remove('mdl-button--colored');  
     //pushButton.innerHTML = '<img src="images/silent.svg" width=15 title="Pause Alerts!" rel="tooltip">';
     //pushButton.textContent = 'Pause Alerts';
   } else {
     pushButton.innerHTML='<i class="fa fa-bell"></i> Get Alerts !';
+    pushButton.classList.add('mdl-button--raised');
+    pushButton.classList.add('mdl-button--colored');   
     //pushButton.innerHTML = '<img src="images/bell.svg" width=15 title="Get AQI Alerts!" rel="tooltip">';
     //pushButton.textContent = 'Get AQI Alerts';
   }
@@ -97,6 +101,8 @@ function subscribeUser() {
     isSubscribed = true;
 
     updateBtn();
+      
+    $('#sendToken').css('visibility', 'visible');  
   })
   .catch(function(err) {
     console.log('Failed to subscribe the user: ', err);
@@ -131,8 +137,8 @@ function initializeUI() {
         unsubscribeUser();
       } else {
         subscribeUser();
-        $('#sendToken').css('visibility', 'visible');
-        $('#getAlerts').css('visibility','hidden');
+        //$('#sendToken').css('visibility', 'visible');
+        //$('#getAlerts').css('visibility','hidden');
       }
   });
 
@@ -243,44 +249,56 @@ function weather() {
 		var aqi = response.data.current.pollution.aqius, main = response.data.current.pollution.mainus, mainChina = response.data.current.pollution.maincn, aqiColor = parseInt(aqi/50), mainTitle="Main pollutant";
 		switch ( main ) {
 		  case "p2":
-		    var pollutant = "PM2.5";
+		    var pollutant = "PM₂₅";
+            var pollutanText = "Fine Particles";    
 		    break;
 		  case "p1":
-		    var pollutant = "PM10";
+		    var pollutant = "PM₁₀";
+            var pollutanText = "Coarse Particulate Matter";
 		    break;
 		  case "o3":
-		    var pollutant = "Ozone";
+		    var pollutant = "O₃";
+            var pollutanText = "Groundlevel Ozone";
 		    break;
 		  case "n2":
-		    var pollutant = "NO2";
+		    var pollutant = "NO₂";
+            var pollutanText = "Nitrogen Dioxide";
 		    break;
 		  case "s2":
-		    var pollutant = "SO2";
+		    var pollutant = "SO₂";
+            var pollutanText = "Sulfur Dioxide";
 		    break;
 		  case "co":
 		    var pollutant = "CO";
+            var pollutanText = "Carbon monoxide";
 		}
 		
         if (main!=mainChina) {
             mainTitle+="s";
             switch ( mainChina ) {
               case "p2":
-                pollutant+= " PM2.5";
+                pollutant+= " PM₂₅";
+                pollutanText+= ", Fine Particles";
                 break;
               case "p1":
-                pollutant+= " PM10";
+                pollutant+= " PM₁₀";
+                pollutanText+= ", Coarse Particulate Matter";
                 break;
               case "o3":
-                pollutant+= " Ozone";
+                pollutant+= " O₃";
+                pollutanText+= ", Groundlevel Ozone";
                 break;
               case "n2":
-                pollutant+= " NO2";
+                pollutant+= " NO₂";
+                pollutanText+= ", Nitrogen Dioxide";
                 break;
               case "s2":
-                pollutant+= " SO2";
+                pollutant+= " SO₂";
+                pollutanText+= ", Sulfur Dioxide";
                 break;
               case "co":
                 pollutant+= " CO";
+                pollutanText+= ", Carbon monoxide";
             }
         }
    /* "units": { //object containing units information
@@ -294,7 +312,7 @@ function weather() {
 		$("#city").html( response.data.city );
         $("#country").html ( response.data.country );
         $('#exhaust').attr('title',mainTitle);    
-		$('#pollutant').html(pollutant + " ");
+		$('#pollutant').html(pollutant + " ").attr('title',pollutanText);
         $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
         $('#aqi').attr('title','Official AQI in Str. Dâmboviţei, Mărăști');  
@@ -372,7 +390,7 @@ function weather() {
     location.innerHTML = "Unable to retrieve your location";
   }
 
-  location.innerHTML = "Locating...";
+  location.innerHTML = "Coordinates: 46.78°, 23.61°"; //"Locating...";
 }
 
     /* HELPER FUNCTIONS FOR URADMONITOR API
