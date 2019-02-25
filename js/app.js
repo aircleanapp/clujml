@@ -250,11 +250,11 @@ function weather() {
 		switch ( main ) {
 		  case "p2":
 		    var pollutant = "PM₂₅";
-            var pollutanText = "Fine Particles";    
+            var pollutanText = "Fine Particles ≤2.5µm";    
 		    break;
 		  case "p1":
 		    var pollutant = "PM₁₀";
-            var pollutanText = "Coarse Particulate Matter";
+            var pollutanText = "Coarse Particulate Matter ≤10µm";
 		    break;
 		  case "o3":
 		    var pollutant = "O₃";
@@ -278,11 +278,11 @@ function weather() {
             switch ( mainChina ) {
               case "p2":
                 pollutant+= " PM₂₅";
-                pollutanText+= ", Fine Particles";
+                pollutanText+= ", Fine Particles ≤2.5µm";
                 break;
               case "p1":
                 pollutant+= " PM₁₀";
-                pollutanText+= ", Coarse Particulate Matter";
+                pollutanText+= ", Coarse Particulate Matter ≤10µm";
                 break;
               case "o3":
                 pollutant+= " O₃";
