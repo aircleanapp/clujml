@@ -55,15 +55,17 @@ function updateBtn() {
   }
 
   if (isSubscribed) {
-    pushButton.innerHTML=''; //'<i class="fa fa-hand-paper-o"></i>'; //'<i class="fa fa-bell-o"></i> Stop Alerts';
+    //pushButton.innerHTML='<i class="fa fa-bell-o"></i> Stop Alerts';
     pushButton.classList.remove('mdl-button--raised');
-    pushButton.classList.remove('mdl-button--colored');  
+    pushButton.classList.remove('mdl-button--colored');
+    pushButton.classList.add('hid');  
     //pushButton.innerHTML = '<img src="images/silent.svg" width=15 title="Pause Alerts!" rel="tooltip">';
     //pushButton.textContent = 'Pause Alerts';
   } else {
     pushButton.innerHTML='<i class="fa fa-bell"></i> Get Alerts !';
     pushButton.classList.add('mdl-button--raised');
     pushButton.classList.add('mdl-button--colored');   
+    pushButton.classList.remove('hid');
     //pushButton.innerHTML = '<img src="images/bell.svg" width=15 title="Get AQI Alerts!" rel="tooltip">';
     //pushButton.textContent = 'Get AQI Alerts';
   }
