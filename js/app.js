@@ -55,7 +55,7 @@ function updateBtn() {
   }
 
   if (isSubscribed) {
-    pushButton.innerHTML='<i class="fa fa-hand-paper-o"></i>'; //'<i class="fa fa-bell-o"></i> Stop Alerts';
+    pushButton.innerHTML=''; //'<i class="fa fa-hand-paper-o"></i>'; //'<i class="fa fa-bell-o"></i> Stop Alerts';
     pushButton.classList.remove('mdl-button--raised');
     pushButton.classList.remove('mdl-button--colored');  
     //pushButton.innerHTML = '<img src="images/silent.svg" width=15 title="Pause Alerts!" rel="tooltip">';
