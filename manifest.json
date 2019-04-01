@@ -40,7 +40,7 @@
       }
   ],
   "start_url": "/",
-  "background_color": "#45B9D8",
+  "background_color": "#4500D8",
   "display": "standalone",
   "scope": "/",
   "theme_color": "#45B9D8"
