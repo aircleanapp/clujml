@@ -77,7 +77,7 @@
 						<ul class="menu">
 							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
 							<!--<li class="menu-item"><a href="news.html">Good2Know</a></li>-->
-							<li class="menu-item"><a href="dashboard.html">1st Sensor</a></li>
+							<li class="menu-item"><a href="#" onclick="pulse('pm10');pulse('pm25');">1st Sensors</a></li>
 							<li class="menu-item"><a href="imp/index.html">Presentation</a></li>
 							<li class="menu-item"><a href="#contact">Contact</a></li>
 						</ul> <!-- .menu -->
@@ -123,6 +123,12 @@
                                     </div>
 								</div>
                                 <span id="tempMin" title="Min today" rel="tooltip"></span><span id="tempMax" title="Max today" style="color:white;font-weight: 900" rel="tooltip"></span>
+                                
+                                <span id="sensor1pm25" title="Sensor 1: PM₂₅ (μg/m³)" rel="tooltip"></span>
+                                <span id="sensor1pm10" title="Sensor 1: PM₁₀ (μg/m³)" rel="tooltip"></span>
+                                <span id="sensor2pm25" title="Sensor 2: PM₂₅ (μg/m³)" rel="tooltip"></span>
+                                <span id="sensor2pm10" title="Sensor 2: PM₁₀ (μg/m³)" rel="tooltip"></span>
+                                
                                 <button disabled id="getAlerts" class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-colored"><!--<img src="images/bell.svg" width=15 title="Get AQI Alerts!" rel="tooltip">--><i class="fa fa-bell"></i> Get Alerts !</button>
                                 
                                 <iframe name="hidden_iframe1" id="hidden_iframe1" style="display:none" onload=""></iframe>
