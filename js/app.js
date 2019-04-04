@@ -304,8 +304,8 @@ function weather() {
             }
         }
    /* "units": { //object containing units information
-      "p2": "ugm3", //pm2.5
-      "p1": "ugm3", //pm10
+      "p2": "μgm³", //pm2.5
+      "p1": "μgm³", //pm10
       "o3": "ppb", //Ozone O3
       "n2": "ppb", //Nitrogen dioxide NO2 
       "s2": "ppb", //Sulfur dioxide SO2 
@@ -529,6 +529,38 @@ function weather() {
     //units=82000002 sensor=pm1
     //units=82000002 sensor=ch2o
     //units=82000009 sensor=pm25
+
+function pulse(valueType) { // = pm10, pm25, temperature, humidity, noise
+    var ts1 = new Date();
+    var f = ts1.toISOString(); f=f.substring(0, f.length - 5)+'%2b02:00'; console.log(f);
+    var ts2 = new Date(ts1.getTime() + 3600000);
+    var t = ts2.toISOString(); t=t.substring(0, t.length - 5)+'%2b02:00'; console.log(t);
+    $.ajax({
+		  type: 'GET',
+		  url: "https://cluj-napoca.pulse.eco/rest/dataRaw?type="+valueType+"&from="+f+"&to="+t,
+		  dataType: 'json',
+          headers: { 'Content-Type' : 'text/plain', 'Authorization' : 'Basic ' + window.btoa('cleanair:stam1234') },
+		  success: function(data, status) { 
+                if (status != 'success') {
+					   console.log(status);
+				} else {
+                    if ( (Object.keys(data)[0] == 'error') || (typeof data[0]=='undefined') )      
+						console.log(data[0]);
+                    else {
+						//var stringified = JSON.stringify(data);
+                        console.log(data[0].value,data[1].value,data[2],data[3],data[4],data[5]);
+                        //$('#sensor'+valueType).attr('src','images/quote.png').attr('title',valueType);
+                        $('#sensor1'+valueType).html("&nbsp;"+data[0].value+"&nbsp;").addClass("sensorColor1");
+                        $('#sensor2'+valueType).html("&nbsp;"+data[1].value+"&nbsp;").addClass("sensorColor2");
+                        //var vocaqi=data[0].vocaqi, voclat=data[0].latitude, voclong=data[0].longitude, vocaddr='';
+                        //$('#vocaqi'+vocid).html("&nbsp;"+vocaqi+"&nbsp;").addClass("aqiColor"+vocaqiColor);
+                        //$('#vocaqicon'+vocid).attr({src: 'images/icons/' + vocaqiColor + '.svg', title: aqiText[vocaqiColor] });
+					}
+				}
+		    	},
+		    	async: true
+		});
+}
 
 function toDate(t) {
     var dt=eval(t*1000);
