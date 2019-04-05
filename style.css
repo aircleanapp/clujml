@@ -1751,9 +1751,6 @@ form textarea {
 */
 #apparentTemperature {color:#F7B563; font-size:1em;}
 
-.sensorColor1 { color: skyblue; }
-.sensorColor2 { color: deepskyblue; }
-
 .hid {display:none;}
 @media (max-width: 767px) {
     .mobileHid {display: none;}
