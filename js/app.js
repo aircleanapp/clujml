@@ -550,16 +550,37 @@ function pulse(valueType) { // = pm10, pm25, temperature, humidity, noise
 						//var stringified = JSON.stringify(data);
                         console.log(data[0].value,data[1].value,data[2],data[3],data[4],data[5]);
                         //$('#sensor'+valueType).attr('src','images/quote.png').attr('title',valueType);
-                        $('#sensor1'+valueType).html("&nbsp;"+data[0].value+"&nbsp;").addClass("sensorColor1");
-                        $('#sensor2'+valueType).html("&nbsp;"+data[1].value+"&nbsp;").addClass("sensorColor2");
+                        $('#sensor1').attr({src: 'images/icons/sensor1.svg', title: 'Sensor 1' });
+                        $('#sensor2').attr({src: 'images/icons/sensor2.svg', title: 'Sensor 2' });
+                        var s1 = data[0].value;
+                        var s2 = data[1].value;
+                        $('#sensor1'+valueType).html("&nbsp;"+s1+"&nbsp;").addClass("aqiColor"+toAQI(s1,valueType));
+                        $('#sensor2'+valueType).html("&nbsp;"+s2+"&nbsp;").addClass("aqiColor"+toAQI(s2,valueType));
                         //var vocaqi=data[0].vocaqi, voclat=data[0].latitude, voclong=data[0].longitude, vocaddr='';
                         //$('#vocaqi'+vocid).html("&nbsp;"+vocaqi+"&nbsp;").addClass("aqiColor"+vocaqiColor);
-                        //$('#vocaqicon'+vocid).attr({src: 'images/icons/' + vocaqiColor + '.svg', title: aqiText[vocaqiColor] });
 					}
 				}
 		    	},
 		    	async: true
 		});
+}
+
+function toAQI(n,t) {
+    if (t=='pm25') {
+        if (n<=12) { return 0; }
+        else if (n<=36) { return 1; }
+        else if (n<=55) { return 2; }
+        else if (n<=150) { return 3; }
+        else if (n<=250) { return 4; }
+        else return 6; //5 is same color as 4, 6 is same as 7,8,9
+    } else if (t=='pm10') {
+        if (n<=54) { return 0; }
+        else if (n<=154) { return 1; }
+        else if (n<=254) { return 2; }
+        else if (n<=354) { return 3; }
+        else if (n<=424) { return 4; }
+        else return 6; //5 is same color as 4, 6 is same as 7,8,9        
+    } else return 0;
 }
 
 function toDate(t) {
