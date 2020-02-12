@@ -238,7 +238,7 @@ function weather() {
         if (y==null) {var longitude = position.coords.longitude;} else {var longitude=y;}
 
         location.innerHTML ="your latitude is " + latitude.toFixed(2) + " and your longitude is " + longitude.toFixed(2);
-        aqio+='5';
+        //aqio+='5';
 	  var settings = {
 	    "url": "https://api.airvisual.com/v2/nearest_city?lat="+latitude+"&lon="+longitude+"&key="+aqio,
         //"url": "https://api.airvisual.com/v2/nearest_station?lat="+latitude+"&lon="+longitude+"&key="+aqio,
