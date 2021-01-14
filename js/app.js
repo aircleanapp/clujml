@@ -318,7 +318,8 @@ function weather() {
 		$('#pollutant').html(pollutant + " ").attr('title',pollutanText);
         $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
-        $('#aqi').attr('title','Official AQI in Str. Dâmboviţei, Mărăști');  
+        //$('#aqi').attr('title','Official AQI in Str. Dâmboviţei, Mărăști');  
+        $('#aqi').attr('title','Official AQI in Str. Aurel Vlaicu');  
         //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
         $('#aqicon').attr('title',aqiText[aqiColor]);  
