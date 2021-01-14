@@ -1,5 +1,6 @@
 'use strict';
 
+var currentAQI = 0;
 var aqiText = ['Good! Little or no health risk.','Moderate. Kids, elderly and sick may experience irritations.','Unhealthy for kids, elderly and sick! Increased likelihood of respiratory symptoms in sensitive individuals. Others may feel slight irritation.','Unhealthy! Increased aggravation of heart and lungs. Kids, elderly and sick are at high risk to experience adverse health effects.','Very Unhealthy! Everyone can be affected.','','Hazardous! Toxic. Serious risk to heart and lungs. Everyone should avoid all outdoor exertion.','','',''];
 var aqiDesc = ['Good! Ventilating your home is recommended.','Moderate! Most people can enjoy usual outdoor activities.','Unhealthy for Sensitive Groups! Kids, elederly and sick should avoid outdoor activity (others should reduce).','Unhealthy! Outdoor exertion, particularly for sensitive groups, should be limited. Everyone should wear a pollution mask.','Very Unhealthy! Avoid heaby outdoor activity.','','Toxic! Everyone should wear a pollution mask. Homes should be sealed and air purifiers turned on.','','',''];
 aqiText[5] = aqiText [4]; aqiDesc[5] = aqiDesc[4];
@@ -248,7 +249,7 @@ function weather() {
 	  };
 	  $.ajax(settings).done(function (response) {
 	    console.log(response); 
-		var aqi = response.data.current.pollution.aqius, main = response.data.current.pollution.mainus, mainChina = response.data.current.pollution.maincn, aqiColor = parseInt(aqi/50), mainTitle="Main pollutant";
+		var aqi = currentAQI==0 ? response.data.current.pollution.aqius : Math.round(currentAQI), main = response.data.current.pollution.mainus, mainChina = response.data.current.pollution.maincn, aqiColor = parseInt(aqi/50), mainTitle="Main pollutant";
 		switch ( main ) {
 		  case "p2":
 		    var pollutant = "PM₂₅";
@@ -311,8 +312,7 @@ function weather() {
       "s2": "ppb", //Sulfur dioxide SO2 
       "co": "ppm" //Carbon monoxide CO */
 		
-		//$("#city").html( response.data.city );
-        $("#city").html( 'Cluj' );  
+        $("#city").html( 'Cluj' );  //$("#city").html( response.data.city );
         $("#country").html ( response.data.country );
         $('#exhaust').attr('title',mainTitle);    
 		$('#pollutant').html(pollutant + " ").attr('title',pollutanText);
@@ -566,6 +566,41 @@ function pulse(valueType) { // = pm10, pm25, temperature, humidity, noise
 		});
 }
 
+function airly() {
+    $.ajax({
+		  type: 'GET',
+		  url: "https://airapi.airly.eu/v2/measurements/nearest?lat=46.778373&lng=23.614623&maxDistanceKM=20&indexType=US_AQI",
+		  dataType: 'json',
+          headers: { 'Accept' : 'application/json', 'apikey' : 'BKAmCj4S3HlfwFLsFoiwGwSGRabh2LeN' },
+		  success: function(data, status) { 
+                if (status != 'success') {
+					   console.log(status);
+				} else { console.dir(data);
+                    console.log('AQI:'+data.current.indexes[0].value);
+                    currentAQI=data.current.indexes[0].value;
+                    console.log('NO2: '+data.current.values[1].value);
+                        
+//if ( (Object.keys(data)[0] == 'error') || (typeof data[0]=='undefined') )      
+//console.log(data[0]);
+//else {				console.log(data[0].value,data[1].value,data[2],data[3],data[4],data[5]);
+                    
+//$('#sensor1').attr({src: 'images/icons/sensor1.svg', title: 'Sensor 1' });
+//$('#sensor2').attr({src: 'images/icons/sensor2.svg', title: 'Sensor 2' });
+//var s1 = data[0].value;var s2 = data[1].value;
+//$('#sensor1'+valueType).html("&nbsp;"+s1+"&nbsp;").addClass("aqiColor"+toAQI(s1,valueType));
+//$('#sensor2'+valueType).html("&nbsp;"+s2+"&nbsp;").addClass("aqiColor"+toAQI(s2,valueType));
+                    
+//					}                     
+				}
+		    	},
+		    	async: true
+    });
+    
+    
+    
+    
+}
+
 function toAQI(n,t) {
     if (t=='pm25') {
         if (n<=12) { return 0; }
@@ -636,6 +671,7 @@ function replaceF(str) {
         downloadData(time, '82000007', 'vocaqi', userid, userkey, 1 );
         downloadData(time, '82000009', 'vocaqi', userid, userkey, 2 );
         
+        airly();
 		// Cloning main navigation for mobile menu
 		$(".mobile-navigation").append($(".main-navigation .menu").clone());
 
