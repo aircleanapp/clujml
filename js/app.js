@@ -311,7 +311,8 @@ function weather() {
       "s2": "ppb", //Sulfur dioxide SO2 
       "co": "ppm" //Carbon monoxide CO */
 		
-		$("#city").html( response.data.city );
+		//$("#city").html( response.data.city );
+        $("#city").html( 'Cluj' );  
         $("#country").html ( response.data.country );
         $('#exhaust').attr('title',mainTitle);    
 		$('#pollutant').html(pollutant + " ").attr('title',pollutanText);
@@ -327,7 +328,7 @@ function weather() {
     $.getJSON(
       url + apio + "/" + latitude + "," + longitude + "?callback=?",
       function(data) { console.log(data);
-        $("#summaryh").html(replaceF(data.hourly.summary));  
+        $("#summaryh").html(replaceF(data.hourly.summary));
         $("#summaryd").html(replaceF(data.daily.summary));                
         $("#day2tempHigh").html(toC(data.daily.data[1].temperatureHigh)+"°");
         $("#day2tempLow").html(toC(data.daily.data[1].temperatureLow)+"°");
@@ -608,9 +609,10 @@ function today() {
 }
 
 function replaceF(str) {
-  var regex = /\d{1,3}/; 
+  var regex = /\d{1,3}/;
+  var regexinch = /in/;
   var fahr = parseInt(str.match(regex));
-  if (fahr) {
+  if (fahr && !str.match(regexinch)) {
     return str.replace(regex, (toC (fahr))) .replace("°F", "°C");     
   } else {
     return str;
