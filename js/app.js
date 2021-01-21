@@ -319,7 +319,7 @@ function weather() {
         $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
         //$('#aqi').attr('title','Official AQI in Str. Dâmboviţei, Mărăști');  
-        $('#aqi').attr('title','Official AQI in Str. Aurel Vlaicu');  
+        $('#aqi').attr('title','Tentative data from AirVisual');  
         //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
         $('#aqicon').attr('title',aqiText[aqiColor]);  
@@ -568,6 +568,7 @@ function pulse(valueType) { // = pm10, pm25, temperature, humidity, noise
 }
 
 function airly() {
+    var airlyAQI;
     $.ajax({
 		  type: 'GET',
 		  url: "https://airapi.airly.eu/v2/measurements/nearest?lat=46.778373&lng=23.614623&maxDistanceKM=20&indexType=US_AQI",
@@ -577,8 +578,12 @@ function airly() {
                 if (status != 'success') {
 					   console.log(status);
 				} else { console.dir(data);
-                    console.log('AQI:'+data.current.indexes[0].value);
-                    currentAQI=data.current.indexes[0].value;
+                    airlyAQI=data.current.indexes[0].value;
+                    console.log('AQI:'+airlyAQI);
+                    if (airlyAQI!=null) {
+                        currentAQI=airlyAQI;
+                        $('#aqi').attr('title','Official AQI in Str. Aurel Vlaicu'); 
+                    }
                     console.log('NO2: '+data.current.values[1].value);
                         
 //if ( (Object.keys(data)[0] == 'error') || (typeof data[0]=='undefined') )      
