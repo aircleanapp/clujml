@@ -319,7 +319,7 @@ function weather() {
         $("#aqi").html("&nbsp;AQI: " + aqi + "&nbsp;" );
 		$('#aqi').addClass("aqiColor"+aqiColor);
         //$('#aqi').attr('title','Official AQI in Str. Dâmboviţei, Mărăști');  
-        $('#aqi').attr('title','Tentative data from AirVisual');  
+        //$('#aqi').attr('title','Tentative data from AirVisual');  
         //$('#aqi').attr('title',aqiDesc[aqiColor]);  
         $('#aqicon').attr('src','images/icons/' + aqiColor + '.svg');
         $('#aqicon').attr('title',aqiText[aqiColor]);  
@@ -583,8 +583,11 @@ function airly() {
                     if (airlyAQI!=null) {
                         currentAQI=airlyAQI;
                         $('#aqi').attr('title','Official AQI in Str. Aurel Vlaicu'); 
+                    } else {
+                        $('#aqi').attr('title','Tentative data from AirVisual');  
                     }
                     console.log('NO2: '+data.current.values[1].value);
+                    weather();    
                         
 //if ( (Object.keys(data)[0] == 'error') || (typeof data[0]=='undefined') )      
 //console.log(data[0]);
@@ -668,7 +671,7 @@ function replaceF(str) {
 	$(document).ready(function(){
         
         today();
-        weather();
+        
         
         var userid = "4159"; 
         var userkey= "10b933896af21c291af344f487b9515c";
