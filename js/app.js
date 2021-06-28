@@ -602,7 +602,7 @@ function airly() {
     var airlyAQI;
     $.ajax({
 		  type: 'GET',
-		  url: "https://airapi.airly.eu/v2/measurements/nearest?lat=46.78218&lng=23.630594&maxDistanceKM=20&indexType=US_AQI",
+		  url: "https://airapi.airly.eu/v2/installations/nearest?lat=46.78218&lng=23.630594&maxDistanceKM=20&maxResults=1&indexType=US_AQI",
 		  dataType: 'json',
           headers: { 'Accept' : 'application/json', 'apikey' : 'BKAmCj4S3HlfwFLsFoiwGwSGRabh2LeN' },
 		  success: function(data, status) { 
