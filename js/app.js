@@ -613,11 +613,12 @@ function airly() {
                     console.log('AQI:'+airlyAQI);
                     if (airlyAQI!=null) {
                         currentAQI=airlyAQI;
-                        $('#aqi').attr('title','Official AQI in Str. Dâmboviței'); 
+                        $('#aqi').attr('title','Official AQI in Str. Dâmboviței');
+                        console.log('NO2: '+data.current.values[1].value);
                     } else {
                         $('#aqi').attr('title','Tentative data from AirVisual');  
                     }
-                    console.log('NO2: '+data.current.values[1].value);
+                    
                     firebase();
                     weather();    
 //url: "https://airapi.airly.eu/v2/measurements/nearest?lat=46.778373&lng=23.614623&maxDistanceKM=20&indexType=US_AQI",
