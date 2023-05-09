@@ -332,14 +332,14 @@ function weather() {
     var newurl="https://api.open-meteo.com/v1/forecast?latitude=46.77&longitude=23.60&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,precipitation,weathercode,surface_pressure,cloudcover,visibility,windspeed_10m,winddirection_10m,windgusts_10m,soil_moisture_0_1cm,uv_index,is_day,shortwave_radiation&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant,shortwave_radiation_sum&timezone=Africa%2FCairo";	    
     $.getJSON(
       newurl,
-      function(data) { console.log(data.daily.temperature_2m_max);
+      function(data) { console.log(data);
 	//$("#summaryh").html(replaceF(data.hourly.summary));	      
         //$("#summaryh").html(replaceF(data.hourly.summary));
         //$("#summaryd").html(replaceF(data.daily.summary));
 	//$("#summaryd").html(replaceF(data.daily.summary));                
-        $("#day2tempHigh").html(toC(data.daily.temperature_2m_max[1])+"°");
+        $("#day2tempHigh").html(data.daily.temperature_2m_max[1]+"°");
 	//$("#day2tempHigh").html(toC(data.daily.data[1].temperatureHigh)+"°");
-        $("#day2tempLow").html(toC(data.daily.temperature_2m_min[1])+"°");
+        $("#day2tempLow").html(data.daily.temperature_2m_min[1]+"°");
 	//$("#day2tempLow").html(toC(data.daily.data[1].temperatureLow)+"°");
         //$("#day3tempHigh").html(toC(data.daily.data[2].temperatureHigh)+"°");
         //$("#day3tempLow").html(toC(data.daily.data[2].temperatureLow)+"°");
@@ -351,16 +351,16 @@ function weather() {
         //$("#day6tempLow").html(toC(data.daily.data[5].temperatureLow)+"°");
         //$("#day7tempHigh").html(toC(data.daily.data[6].temperatureHigh)+"°");
         //$("#day7tempLow").html(toC(data.daily.data[6].temperatureLow)+"°");	      
-        $("#day3tempHigh").html(toC(data.daily.temperature_2m_max[2])+"°");
-        $("#day3tempLow").html(toC(data.daily.temperature_2m_min[2])+"°");
-        $("#day4tempHigh").html(toC(data.daily.temperature_2m_max[3])+"°");
-        $("#day4tempLow").html(toC(data.daily.temperature_2m_min[3])+"°");
-        $("#day5tempHigh").html(toC(data.daily.temperature_2m_max[4])+"°");
-        $("#day5tempLow").html(toC(data.daily.temperature_2m_min[4])+"°");
-        $("#day6tempHigh").html(toC(data.daily.temperature_2m_max[5])+"°");
-        $("#day6tempLow").html(toC(data.daily.temperature_2m_min[5])+"°");
-        $("#day7tempHigh").html(toC(data.daily.temperature_2m_max[6])+"°");
-        $("#day7tempLow").html(toC(data.daily.temperature_2m_min[6])+"°");
+        $("#day3tempHigh").html(data.daily.temperature_2m_max[2]+"°");
+        $("#day3tempLow").html(data.daily.temperature_2m_min[2]+"°");
+        $("#day4tempHigh").html(data.daily.temperature_2m_max[3]+"°");
+        $("#day4tempLow").html(data.daily.temperature_2m_min[3]+"°");
+        $("#day5tempHigh").html(data.daily.temperature_2m_max[4]+"°");
+        $("#day5tempLow").html(data.daily.temperature_2m_min[4]+"°");
+        $("#day6tempHigh").html(data.daily.temperature_2m_max[5]+"°");
+        $("#day6tempLow").html(data.daily.temperature_2m_min[5]+"°");
+        $("#day7tempHigh").html(data.daily.temperature_2m_max[6]+"°");
+        $("#day7tempLow").html(data.daily.temperature_2m_min[6]+"°");
         //$("#day8tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°");
         //$("#day8tempLow").html(toC(data.daily.data[7].temperatureLow)+"°");              
         //$("#day2icon").attr({src: 'images/icons/' + data.daily.data[1].icon + '.svg', title: data.daily.data[1].summary });
@@ -371,9 +371,9 @@ function weather() {
         //$("#day7icon").attr({src: 'images/icons/' + data.daily.data[6].icon + '.svg', title: data.daily.data[6].summary });
         //$("#day8icon").attr({src: 'images/icons/' + data.daily.data[7].icon + '.svg', title: data.daily.data[7].summary });
         //$("#temp").html( toC(data.currently.temperature) + "°");
-	$("#tempMax").html(toC(data.daily.temperature_2m_max[0]) + "°");
+	$("#tempMax").html(data.daily.temperature_2m_max[0] + "°");
 	//$("#tempMax").html(toC(data.daily.data[0].temperatureMax) + "°");
-        $("#tempMin").html(toC(data.daily.temperature_2m_min[0]) + "°..");
+        $("#tempMin").html(data.daily.temperature_2m_min[0] + "°..");
         //$("#tempMin").html(toC(data.daily.data[0].temperatureMin) + "°..");
         //$("#apparentTemperature").html( toC (data.currently.apparentTemperature) + "°");
 	//$("#ozone").html(Math.round(data.currently.ozone)+" DU");
