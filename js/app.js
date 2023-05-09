@@ -370,7 +370,7 @@ function weather() {
         //$("#day6icon").attr({src: 'images/icons/' + data.daily.data[5].icon + '.svg', title: data.daily.data[5].summary });
         //$("#day7icon").attr({src: 'images/icons/' + data.daily.data[6].icon + '.svg', title: data.daily.data[6].summary });
         //$("#day8icon").attr({src: 'images/icons/' + data.daily.data[7].icon + '.svg', title: data.daily.data[7].summary });
-        $("#temp").html( toC(data.current_weather.termperature) + "°");
+        $("#temp").html( data.current_weather.temperature + "°");
 		      //$("#temp").html( toC(data.currently.temperature) + "°");
 	$("#tempMax").html(data.daily.temperature_2m_max[0] + "°");
 	//$("#tempMax").html(toC(data.daily.data[0].temperatureMax) + "°");
@@ -393,7 +393,7 @@ function weather() {
 	//	$("#windBearing").html(data.currently.windBearing + "° ");
 		      
 	//	$("#dewPoint").html( toC(data.currently.dewPoint) + "°");
-	$("#pressure").html( Math.round(data.currently.pressure));	      
+	$("#pressure").html( Math.round(data.hourly.surface_pressure[0]));	      
 	//	$("#pressure").html( Math.round(data.currently.pressure));
 	//	$("#cloudCover").html( Math.round(data.currently.cloudCover*100) + "%");
 	//	$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
