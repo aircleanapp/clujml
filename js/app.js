@@ -326,9 +326,12 @@ function weather() {
         $('#aqicon').attr('title',aqiText[aqiColor]);  
 	  });
       apio+='e';
-        
+    
+// url + apio + "/" + latitude + "," + longitude + "?callback=?",
+	    
+    var newurl="https://api.open-meteo.com/v1/forecast?latitude=46.77&longitude=23.60&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant,shortwave_radiation_sum&timezone=Africa%2FCairo";	    
     $.getJSON(
-      url + apio + "/" + latitude + "," + longitude + "?callback=?",
+      newurl,
       function(data) { console.log(data);
         $("#summaryh").html(replaceF(data.hourly.summary));
         $("#summaryd").html(replaceF(data.daily.summary));                
