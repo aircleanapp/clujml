@@ -329,7 +329,7 @@ function weather() {
     
 // url + apio + "/" + latitude + "," + longitude + "?callback=?",
 	    
-    var newurl="https://api.open-meteo.com/v1/forecast?latitude=46.77&longitude=23.60&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,precipitation,weathercode,surface_pressure,cloudcover,visibility,windspeed_10m,winddirection_10m,windgusts_10m,soil_moisture_0_1cm,uv_index,is_day,shortwave_radiation&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant,shortwave_radiation_sum&timezone=Africa%2FCairo";	    
+    var newurl="https://api.open-meteo.com/v1/forecast?latitude=46.77&longitude=23.60&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,precipitation,weathercode,surface_pressure,cloudcover,visibility,windspeed_10m,winddirection_10m,windgusts_10m,soil_moisture_0_1cm,uv_index,is_day,shortwave_radiation&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant,shortwave_radiation_sum&current_weather=true&timezone=Europe%2FMoscow";	    
     $.getJSON(
       newurl,
       function(data) { console.log(data);
@@ -370,7 +370,8 @@ function weather() {
         //$("#day6icon").attr({src: 'images/icons/' + data.daily.data[5].icon + '.svg', title: data.daily.data[5].summary });
         //$("#day7icon").attr({src: 'images/icons/' + data.daily.data[6].icon + '.svg', title: data.daily.data[6].summary });
         //$("#day8icon").attr({src: 'images/icons/' + data.daily.data[7].icon + '.svg', title: data.daily.data[7].summary });
-        //$("#temp").html( toC(data.currently.temperature) + "°");
+        $("#temp").html( toC(data.current_weather.termperature) + "°");
+		      //$("#temp").html( toC(data.currently.temperature) + "°");
 	$("#tempMax").html(data.daily.temperature_2m_max[0] + "°");
 	//$("#tempMax").html(toC(data.daily.data[0].temperatureMax) + "°");
         $("#tempMin").html(data.daily.temperature_2m_min[0] + "°..");
@@ -379,12 +380,20 @@ function weather() {
 	//$("#ozone").html(Math.round(data.currently.ozone)+" DU");
 	$("#uvIndex").html(data.daily.uv_index_max[0]);
 	//$("#uvIndex").html(data.currently.uvIndex);
-        //$("#precipProbability").html( Math.round(data.currently.precipProbability*100) + "%");  
+	$("#precipProbability").html( Math.round(data.daily.precipitation_probability_max[0]) + "%");
+        //$("#precipProbability").html( Math.round(data.currently.precipProbability*100) + "%");
+		      
+
 	//	$("#humidity").html( Math.round(data.currently.humidity*100) + "%");
-	//	$("#windSpeed").html( Math.round (data.currently.windSpeed*1.609) + " ㎞h");
-	//	$("#windGust").html( Math.round (data.currently.windGust*1.609) + " ㎞h");
-	//	$("#windBearing").html(data.currently.windBearing + "° ");		  
+	$("#windSpeed").html( Math.round (data.daily.windspeed_10m_max[0]) + " ㎞h");
+		      //	$("#windSpeed").html( Math.round (data.currently.windSpeed*1.609) + " ㎞h");
+	$("#windGust").html( Math.round (data.daily.windgusts_10m_max[0]) + " ㎞h");
+		      //	$("#windGust").html( Math.round (data.currently.windGust*1.609) + " ㎞h");
+	$("#windBearing").html(data.daily.winddirection_10m_dominant[0] + "° ");
+	//	$("#windBearing").html(data.currently.windBearing + "° ");
+		      
 	//	$("#dewPoint").html( toC(data.currently.dewPoint) + "°");
+	$("#pressure").html( Math.round(data.currently.pressure));	      
 	//	$("#pressure").html( Math.round(data.currently.pressure));
 	//	$("#cloudCover").html( Math.round(data.currently.cloudCover*100) + "%");
 	//	$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
