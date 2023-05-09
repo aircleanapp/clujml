@@ -333,9 +333,9 @@ function weather() {
     $.getJSON(
       newurl,
       function(data) { console.log(data);
-	$("#summaryh").html(replaceF(data.hourly.summary));	      
+	//$("#summaryh").html(replaceF(data.hourly.summary));	      
         //$("#summaryh").html(replaceF(data.hourly.summary));
-        $("#summaryd").html(replaceF(data.daily.summary));
+        //$("#summaryd").html(replaceF(data.daily.summary));
 	//$("#summaryd").html(replaceF(data.daily.summary));                
         $("#day2tempHigh").html(toC(data.daily.data[1].temperatureHigh)+"°");
 	//$("#day2tempHigh").html(toC(data.daily.data[1].temperatureHigh)+"°");
