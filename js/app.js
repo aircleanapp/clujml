@@ -169,10 +169,10 @@ function toC(fahr) {
 
 function wdcicon(d) {
     switch (d) {
-        case 0: return "icon-2"; break;
-        case 1: return "icon-1"; break;    
-        case 2: return "icon-3"; break;    
-        case 3: return "icon-5"; break; 
+        case '0': return "icon-2"; break;
+        case '1': return "icon-1"; break;    
+        case '2': return "icon-3"; break;    
+        case '3': return "icon-5"; break; 
         case '45': return "icon-7"; break;
         case '48': return "icon-8"; break;
         case '51': return "icon-4"; break;
@@ -180,7 +180,7 @@ function wdcicon(d) {
         case '55': return "icon-10"; break;
         case '56': return "icon-9"; break;
         case '57': return "icon-10"; break;
-        case 61: return "icon-9"; break;
+        case '61': return "icon-9"; break;
         case '63': return "icon-10"; break;
         case '65': return "icon-11"; break;
         case '66': return "icon-9"; break;
@@ -206,7 +206,7 @@ function wdctext(d) {
         case '0': return "Clear sky"; break;
         case '1': return "Mainly clear"; break;    
         case '2': return "Partly cloudy"; break;    
-        case 3: return "Overcast"; break; 
+        case '3': return "Overcast"; break; 
         case '45': return "Fog"; break;
         case '48': return "Depositing rime fog"; break;
         case '51': return "Light drizzle"; break;
@@ -214,7 +214,7 @@ function wdctext(d) {
         case '55': return "Dense intensity drizzle"; break;
         case '56': return "Light Freezing drizzle"; break;
         case '57': return "Freezing drizzle: dense intensity"; break;
-        case 61: return "Slight rain"; break;
+        case '61': return "Slight rain"; break;
         case '63': return "Moderate rain"; break;
         case '65': return "Heavy rain"; break;
         case '66': return "Light freezing rain"; break;
@@ -432,7 +432,7 @@ function weather() {
         //$("#day8tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°");
         //$("#day8tempLow").html(toC(data.daily.data[7].temperatureLow)+"°");              
         console.log(data.daily.weathercode);
-        $("#day2icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[1]) + '.svg', title: wdctext(data.daily.weathercode[1]) });    
+        $("#day2icon").attr({src: 'images/icons/' + wdcicon(toString(data.daily.weathercode[1]) + '.svg', title: wdctext(toString(data.daily.weathercode[1]) });    
         //$("#day2icon").attr({src: 'images/icons/' + data.daily.data[1].icon + '.svg', title: data.daily.data[1].summary });
         $("#day3icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[2]) + '.svg', title: wdctext(data.daily.weathercode[3]) });
         //$("#day3icon").attr({src: 'images/icons/' + data.daily.data[2].icon + '.svg', title: data.daily.data[2].summary });
@@ -473,7 +473,7 @@ function weather() {
 	//	$("#pressure").html( Math.round(data.currently.pressure));
 	//	$("#cloudCover").html( Math.round(data.currently.cloudCover*100) + "%");
 	//	$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
-        $("#icon").attr('src','images/icons/' +  wdcicon(data.daily.weathercode[0]) + '.svg');
+        $("#icon").attr('src','images/icons/' +  wdcicon(toString(data.daily.weathercode[0])) + '.svg');
 	//	$("#icon").attr('src','images/icons/' + data.currently.icon + '.svg');
         //$("#summary").html(data.currently.summary);
         if (typeof data.alerts != 'undefined') {              
