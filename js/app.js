@@ -213,7 +213,7 @@ function wdctext(d) {
         case '53': return "Moderate drizzle"; break;
         case '55': return "Dense intensity drizzle"; break;
         case '56': return "Light Freezing drizzle"; break;
-        case '57': return "Freezing drizzle: dense intensity"; break;"
+        case '57': return "Freezing drizzle: dense intensity"; break;
         case '61': return "Slight rain"; break;
         case '63': return "Moderate rain"; break;
         case '65': return "Heavy rain"; break;
