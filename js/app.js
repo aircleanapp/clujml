@@ -235,11 +235,6 @@ function wdctext(d) {
     }
 }
 
-
-function wdctext(d) {
-    return Math.round( (fahr-32)/1.8 ); 
-}
-
 function showWorldMap () {
     $("#worldMap").html('<iframe src="https://waqi.info/" style="border:0px #ffffff none;" id="aqiMapWorld" class="aqiMap" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="500px" allowfullscreen></iframe>'); 
     $("#showWorldMap").addClass('hid');
