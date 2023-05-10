@@ -179,7 +179,7 @@ function wdcicon(d) {
         case '53': return "icon-9"; break;
         case '55': return "icon-10"; break;
         case '56': return "icon-9"; break;
-        case '57': return "icon-10"; break;"
+        case '57': return "icon-10"; break;
         case '61': return "icon-9"; break;
         case '63': return "icon-10"; break;
         case '65': return "icon-11"; break;
@@ -439,10 +439,15 @@ function weather() {
         console.log(data.daily.weathercode);
         $("#day2icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[1]) + '.svg', title: wdctext(data.daily.weathercode[1]) });    
         //$("#day2icon").attr({src: 'images/icons/' + data.daily.data[1].icon + '.svg', title: data.daily.data[1].summary });
+        $("#day3icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[2]) + '.svg', title: wdctext(data.daily.weathercode[3]) });
         //$("#day3icon").attr({src: 'images/icons/' + data.daily.data[2].icon + '.svg', title: data.daily.data[2].summary });
+        $("#day4icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[3]) + '.svg', title: wdctext(data.daily.weathercode[3]) });
         //$("#day4icon").attr({src: 'images/icons/' + data.daily.data[3].icon + '.svg', title: data.daily.data[3].summary });
+        $("#day5icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[4]) + '.svg', title: wdctext(data.daily.weathercode[4]) });
         //$("#day5icon").attr({src: 'images/icons/' + data.daily.data[4].icon + '.svg', title: data.daily.data[4].summary });
+        $("#day6icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[5]) + '.svg', title: wdctext(data.daily.weathercode[5]) });
         //$("#day6icon").attr({src: 'images/icons/' + data.daily.data[5].icon + '.svg', title: data.daily.data[5].summary });
+        $("#day7icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[6]) + '.svg', title: wdctext(data.daily.weathercode[6]) });
         //$("#day7icon").attr({src: 'images/icons/' + data.daily.data[6].icon + '.svg', title: data.daily.data[6].summary });
         //$("#day8icon").attr({src: 'images/icons/' + data.daily.data[7].icon + '.svg', title: data.daily.data[7].summary });
         $("#temp").html( data.current_weather.temperature + "°");
