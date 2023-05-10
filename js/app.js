@@ -167,71 +167,71 @@ function toC(fahr) {
     return Math.round( (fahr-32)/1.8 ); 
 }
 
-function wdcicon(d) {
+function wdcicon(d) { console.dir(d);
     switch (d) {
-        case '0': return "icon-2"; break;
-        case '1': return "icon-1"; break;    
-        case '2': return "icon-3"; break;    
-        case '3': return "icon-5"; break; 
-        case '45': return "icon-7"; break;
-        case '48': return "icon-8"; break;
-        case '51': return "icon-4"; break;
-        case '53': return "icon-9"; break;
-        case '55': return "icon-10"; break;
-        case '56': return "icon-9"; break;
-        case '57': return "icon-10"; break;
-        case '61': return "icon-9"; break;
-        case '63': return "icon-10"; break;
-        case '65': return "icon-11"; break;
-        case '66': return "icon-9"; break;
-        case '67': return "icon-11"; break;
-        case '71': return "icon-13"; break;
-        case '73': return "icon-13"; break;
-        case '75': return "icon-14"; break;
-        case '77': return "icon-13"; break;
-        case '80': return "icon-9"; break;    
-        case '81': return "icon-10"; break;
-        case '82': return "icon-11"; break;
-        case '85': return "icon-13"; break;
-        case '86': return "icon-14"; break;
-        case '95': return "icon-12"; break;
-        case '96': return "icon-12"; break;
-        case '99': return "icon-12"; break;
-        default: return "";
+        case 0: return "icon-2"; break;
+        case 1: return "icon-1"; break;    
+        case 2: return "icon-3"; break;    
+        case 3: return "icon-5"; break; 
+        case 45: return "icon-7"; break;
+        case 48: return "icon-8"; break;
+        case 51: return "icon-4"; break;
+        case 53: return "icon-9"; break;
+        case 55: return "icon-10"; break;
+        case 56: return "icon-9"; break;
+        case 57: return "icon-10"; break;
+        case 61: return "icon-9"; break;
+        case 63: return "icon-10"; break;
+        case 65: return "icon-11"; break;
+        case 66: return "icon-9"; break;
+        case 67: return "icon-11"; break;
+        case 71: return "icon-13"; break;
+        case 73: return "icon-13"; break;
+        case 75: return "icon-14"; break;
+        case 77: return "icon-13"; break;
+        case 80: return "icon-9"; break;    
+        case 81: return "icon-10"; break;
+        case 82: return "icon-11"; break;
+        case 85: return "icon-13"; break;
+        case 86: return "icon-14"; break;
+        case 95: return "icon-12"; break;
+        case 96: return "icon-12"; break;
+        case 99: return "icon-12"; break;
+        default: return "icon-2";
     }
 }
 
 function wdctext(d) {
     switch (d) {
-        case '0': return "Clear sky"; break;
-        case '1': return "Mainly clear"; break;    
-        case '2': return "Partly cloudy"; break;    
-        case '3': return "Overcast"; break; 
-        case '45': return "Fog"; break;
-        case '48': return "Depositing rime fog"; break;
-        case '51': return "Light drizzle"; break;
-        case '53': return "Moderate drizzle"; break;
-        case '55': return "Dense intensity drizzle"; break;
-        case '56': return "Light Freezing drizzle"; break;
-        case '57': return "Freezing drizzle: dense intensity"; break;
-        case '61': return "Slight rain"; break;
-        case '63': return "Moderate rain"; break;
-        case '65': return "Heavy rain"; break;
-        case '66': return "Light freezing rain"; break;
-        case '67': return "Heavy freezing rain"; break;
-        case '71': return "Slight snow fall"; break;
-        case '73': return "Moderate snow fall"; break;
-        case '75': return "Heavy snow fall"; break;
-        case '77': return "Snow grains"; break;
-        case '80': return "Slight rain showers"; break;    
-        case '81': return "Moderate rain showers"; break;
-        case '82': return "Violent rain showers"; break;
-        case '85': return "Slight snow showers"; break;
-        case '86': return "Heavy snow showers"; break;
-        case '95': return "Thunderstorm"; break;
-        case '96': return "Thunderstorm with slight hail"; break;
-        case '99': return "Thunderstorm with heavy hail"; break;
-        default: return "";
+        case 0: return "Clear sky"; break;
+        case 1: return "Mainly clear"; break;    
+        case 2: return "Partly cloudy"; break;    
+        case 3: return "Overcast"; break; 
+        case 45: return "Fog"; break;
+        case 48: return "Depositing rime fog"; break;
+        case 51: return "Light drizzle"; break;
+        case 53: return "Moderate drizzle"; break;
+        case 55: return "Dense intensity drizzle"; break;
+        case 56: return "Light Freezing drizzle"; break;
+        case 57: return "Freezing drizzle: dense intensity"; break;
+        case 61: return "Slight rain"; break;
+        case 63: return "Moderate rain"; break;
+        case 65: return "Heavy rain"; break;
+        case 66: return "Light freezing rain"; break;
+        case 67: return "Heavy freezing rain"; break;
+        case 71: return "Slight snow fall"; break;
+        case 73: return "Moderate snow fall"; break;
+        case 75: return "Heavy snow fall"; break;
+        case 77: return "Snow grains"; break;
+        case 80: return "Slight rain showers"; break;    
+        case 81: return "Moderate rain showers"; break;
+        case 82: return "Violent rain showers"; break;
+        case 85: return "Slight snow showers"; break;
+        case 86: return "Heavy snow showers"; break;
+        case 95: return "Thunderstorm"; break;
+        case 96: return "Thunderstorm with slight hail"; break;
+        case 99: return "Thunderstorm with heavy hail"; break;
+        default: return "Clear sky";
     }
 }
 
@@ -432,7 +432,7 @@ function weather() {
         //$("#day8tempHigh").html(toC(data.daily.data[7].temperatureHigh)+"°");
         //$("#day8tempLow").html(toC(data.daily.data[7].temperatureLow)+"°");              
         console.log(data.daily.weathercode);
-        $("#day2icon").attr({src: 'images/icons/' + wdcicon(toString(data.daily.weathercode[1]) + '.svg', title: wdctext(toString(data.daily.weathercode[1]) });    
+        $("#day2icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[1]) + '.svg', title: wdctext(data.daily.weathercode[1]) });    
         //$("#day2icon").attr({src: 'images/icons/' + data.daily.data[1].icon + '.svg', title: data.daily.data[1].summary });
         $("#day3icon").attr({src: 'images/icons/' + wdcicon(data.daily.weathercode[2]) + '.svg', title: wdctext(data.daily.weathercode[3]) });
         //$("#day3icon").attr({src: 'images/icons/' + data.daily.data[2].icon + '.svg', title: data.daily.data[2].summary });
@@ -471,9 +471,11 @@ function weather() {
 	//	$("#dewPoint").html( toC(data.currently.dewPoint) + "°");
 	$("#pressure").html( Math.round(data.hourly.surface_pressure[0]));	      
 	//	$("#pressure").html( Math.round(data.currently.pressure));
+    $("#cloudCover").html( Math.round(data.hourly.cloudcover[0]) + "%");                      
 	//	$("#cloudCover").html( Math.round(data.currently.cloudCover*100) + "%");
+    $("#visibility").html( Math.round(data.hourly.visibility[0]/1000) + "㎞");                   
 	//	$("#visibility").html( Math.round(data.currently.visibility*1.609) + "㎞");  
-        $("#icon").attr('src','images/icons/' +  wdcicon(toString(data.daily.weathercode[0])) + '.svg');
+    $("#icon").attr({src: 'images/icons/' + wdcicon(data.current_weather.weathercode) + '.svg', title: wdctext(data.current_weather.weathercode) }); 
 	//	$("#icon").attr('src','images/icons/' + data.currently.icon + '.svg');
         //$("#summary").html(data.currently.summary);
         if (typeof data.alerts != 'undefined') {              
