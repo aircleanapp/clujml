@@ -396,7 +396,8 @@ function weather() {
       apio+='e';
     
 // url + apio + "/" + latitude + "," + longitude + "?callback=?",
-	    
+    joke("random");
+        
     var newurl="https://api.open-meteo.com/v1/forecast?latitude=46.77&longitude=23.60&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,precipitation,weathercode,surface_pressure,cloudcover,visibility,windspeed_10m,winddirection_10m,windgusts_10m,soil_moisture_0_1cm,uv_index,is_day,shortwave_radiation&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant,shortwave_radiation_sum&current_weather=true&timezone=Europe%2FMoscow";	    
     $.getJSON(
       newurl,
@@ -505,6 +506,23 @@ function weather() {
 
   location.innerHTML = "Coordinates: 46.78°, 23.61°"; //"Locating...";
 }
+
+
+    function joke(id) {
+		$.ajax({
+	    		type: 'GET',
+    			url: "https://official-joke-api.appspot.com/jokes/" + id ,
+	    		dataType: 'json',
+	    		headers: { 'Content-Type' : 'text/plain' },
+			success: function(data) { 
+				console.log(data);
+				$("#summaryh").html(data.setup);
+                $("#summaryd").html(data.punchline);
+			},
+			async: true
+		});
+	}
+    
 
     /* HELPER FUNCTIONS FOR URADMONITOR API
 	function getUnit(sensor) {
